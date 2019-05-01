@@ -1,5 +1,5 @@
 {
-  "name": "contact-manager-tryout",
+  "name": "Webshop.CLI",
   "type": "project:application",
   "paths": {
     "root": "src",
