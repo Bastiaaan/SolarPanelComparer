@@ -23,7 +23,7 @@
   "platform": {
     "hmr": false,
     "open": false,
-    "port": 61239,
+    "port": 44369,
     "output": "wwwroot"
   },
   "packageManager": "npm"

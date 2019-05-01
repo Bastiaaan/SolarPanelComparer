@@ -19,7 +19,7 @@
   "include": [
     "./src/**/*.ts",
     "./test/**/*.ts",
-    "./types/**/*.d.ts"
+    "./types/**/*.d.ts", "../Webshop.Data/Models/Vendor.cs"
   ],
   "atom": {
     "rewriteTsconfig": false

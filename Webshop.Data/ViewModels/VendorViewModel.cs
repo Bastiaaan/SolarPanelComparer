@@ -3,9 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Webshop.Data.Framework;
-    using Webshop.Data.Models;
-    public class ProductViewModel : IMapFrom<Product>
+    using Data.Framework;
+    using Data.Models;
+
+    public class VendorViewModel : IMapFrom<Vendor>
     {
         public int Id { get; set; }
 

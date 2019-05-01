@@ -14,25 +14,25 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Vendor> Suppliers { get; set; }
 
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductSupplier>()
-                .HasKey(keys => new { keys.ProductId, keys.SupplierId });
+            modelBuilder.Entity<ProductVendor>()
+                .HasKey(keys => new { keys.ProductId, keys.VendorId });
 
-            modelBuilder.Entity<ProductSupplier>()
+            modelBuilder.Entity<ProductVendor>()
                 .HasOne(ic => ic.Product)
-                .WithMany(i => i.ProductSuppliers)
+                .WithMany(i => i.ProductVendors)
                 .HasForeignKey(ic => ic.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ProductSupplier>()
-                .HasOne(ic => ic.Supplier)
-                .WithMany(i => i.ProductSuppliers)
-                .HasForeignKey(ic => ic.SupplierId)
+            modelBuilder.Entity<ProductVendor>()
+                .HasOne(ic => ic.Vendor)
+                .WithMany(i => i.ProductVendors)
+                .HasForeignKey(ic => ic.VendorId)
                 .OnDelete(DeleteBehavior.Cascade);
             
             base.OnModelCreating(modelBuilder);

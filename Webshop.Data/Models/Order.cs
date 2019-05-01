@@ -18,9 +18,9 @@ namespace Webshop.Data.Models
 
         public string Comment { get; set; }
 
-        public int SupplierId { get; set; }
+        public int VendorId { get; set; }
 
-        [ForeignKey("{Supplier.Id}")]
-        public Supplier Supplier { get; set; }
+        [ForeignKey("{Vendor.Id}")]
+        public Vendor Vendor { get; set; }
     }
 }

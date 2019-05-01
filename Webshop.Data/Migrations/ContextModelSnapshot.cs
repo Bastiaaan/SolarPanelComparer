@@ -31,13 +31,13 @@ namespace Webshop.Data.Migrations
 
                     b.Property<DateTime>("EstimatedDeliveryTime");
 
-                    b.Property<int>("SupplierId");
+                    b.Property<int>("VendorId");
 
-                    b.Property<int?>("{Supplier.Id}");
+                    b.Property<int?>("{Vendor.Id}");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("{Supplier.Id}");
+                    b.HasIndex("{Vendor.Id}");
 
                     b.ToTable("Order");
                 });
@@ -48,13 +48,9 @@ namespace Webshop.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImageUrl");
-
                     b.Property<string>("Name");
 
-                    b.Property<int>("OrderId");
-
-                    b.Property<double>("Price");
+                    b.Property<int?>("OrderId");
 
                     b.HasKey("Id");
 
@@ -63,38 +59,31 @@ namespace Webshop.Data.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Webshop.Data.Models.ProductSupplier", b =>
+            modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("ProductId");
 
-                    b.Property<int>("SupplierId");
+                    b.Property<int>("VendorId");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id");
 
-                    b.HasIndex("ProductId");
+                    b.Property<string>("ImageUrl");
 
-                    b.HasIndex("SupplierId");
+                    b.Property<int>("OrderId");
 
-                    b.ToTable("ProductSupplier");
-                });
+                    b.Property<double>("Price");
 
-            modelBuilder.Entity("Webshop.Data.Models.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<double>("TAV");
 
-                    b.Property<string>("Address");
+                    b.HasKey("ProductId", "VendorId");
 
-                    b.Property<string>("Name");
+                    b.HasAlternateKey("Id");
 
-                    b.HasKey("Id");
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("Supplier");
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("ProductVendor");
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.User", b =>
@@ -108,31 +97,50 @@ namespace Webshop.Data.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Webshop.Data.Models.Vendor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vendor");
+                });
+
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
-                    b.HasOne("Webshop.Data.Models.Supplier", "Supplier")
+                    b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
                         .WithMany()
-                        .HasForeignKey("{Supplier.Id}");
+                        .HasForeignKey("{Vendor.Id}");
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.Product", b =>
                 {
-                    b.HasOne("Webshop.Data.Models.Order", "OrderDetails")
+                    b.HasOne("Webshop.Data.Models.Order")
                         .WithMany("Product")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OrderId");
                 });
 
-            modelBuilder.Entity("Webshop.Data.Models.ProductSupplier", b =>
+            modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
                 {
+                    b.HasOne("Webshop.Data.Models.Order", "OrderDetails")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Webshop.Data.Models.Product", "Product")
-                        .WithMany("ProductSuppliers")
+                        .WithMany("ProductVendors")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Webshop.Data.Models.Supplier", "Supplier")
-                        .WithMany("ProductSuppliers")
-                        .HasForeignKey("SupplierId")
+                    b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
+                        .WithMany("ProductVendors")
+                        .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

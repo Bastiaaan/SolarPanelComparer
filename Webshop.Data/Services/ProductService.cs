@@ -55,11 +55,12 @@
                 {
                     var mappedProduct = Mapper.Map<Product>(product);
                     DbContext.Products.Update(mappedProduct);
+                    DbContext.Entry(mappedProduct).State = EntityState.Modified;
                     DbContext.SaveChanges();
                 }
                 catch(DbUpdateConcurrencyException ex)
                 {
-                    if(product == null)
+                    if(DbContext.Products.Find(product.Id) == null)
                     {
                         throw new ArgumentNullException("Geen product gevonden");
                     }

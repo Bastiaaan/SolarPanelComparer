@@ -14,18 +14,7 @@
 
         public string Name { get; set; }
 
-        public double Price { get; set; }
-
-        public double TAV { get { return 0.21 * this.Price; } }
-
-        public string ImageUrl { get; set; }
-
-        [ForeignKey("OrderId")]
-        public Order OrderDetails { get; set; }
-
-        public int OrderId { get; set; }
-
-        [InverseProperty(nameof(ProductSupplier.Product))]
-        public ICollection<ProductSupplier> ProductSuppliers { get; set; }
+        [InverseProperty(nameof(ProductVendor.Product))]
+        public ICollection<ProductVendor> ProductVendors { get; set; }
     }
 }
