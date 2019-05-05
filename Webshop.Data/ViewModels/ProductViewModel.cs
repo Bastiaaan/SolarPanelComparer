@@ -11,6 +11,6 @@
 
         public string Name { get; set; }
 
-        public IEnumerable<ProductVendorViewModel> Products { get; set; }
+        public IEnumerable<ProductVendorViewModel> Vendors { get; set; }
     }
 }

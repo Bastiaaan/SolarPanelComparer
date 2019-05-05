@@ -6,6 +6,7 @@
     "resources": "resources",
     "elements": "resources/elements",
     "attributes": "resources/attributes",
+    "modules":  "modules",
     "valueConverters": "resources/value-converters",
     "bindingBehaviors": "resources/binding-behaviors"
   },
@@ -23,7 +24,7 @@
   "platform": {
     "hmr": false,
     "open": false,
-    "port": 44369,
+    "port": 8080,
     "output": "wwwroot"
   },
   "packageManager": "npm"

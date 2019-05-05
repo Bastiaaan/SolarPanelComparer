@@ -6,7 +6,7 @@ export function configure(aurelia) {
     aurelia.use
         .standardConfiguration()
         .feature(PLATFORM.moduleName('resources/index'))
-        .plugin('aurelia-api', function (config) {
+        .plugin(PLATFORM.moduleName('aurelia-api'), function (config) {
         config
             .registerEndpoint('api', environment.apiEndpoint)
             .registerEndpoint('identity', environment.identityEndpoint)
@@ -16,6 +16,6 @@ export function configure(aurelia) {
     if (environment.testing) {
         aurelia.use.developmentLogging(PLATFORM.moduleName('aurelia-testing'));
     }
-    aurelia.start().then(function () { return aurelia.setRoot(); });
+    aurelia.start().then(function () { return aurelia.setRoot(PLATFORM.moduleName('app')); });
 }
 //# sourceMappingURL=main.js.map

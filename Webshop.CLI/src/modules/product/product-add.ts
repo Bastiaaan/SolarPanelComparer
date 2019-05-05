@@ -14,7 +14,9 @@ export class Product {
   } 
 
   add() {
-
+    this.api.find('product/SaveProduct').then(product => {
+      JSON.parse(JSON.stringify(product));
+    });
   }
 
   update() {

@@ -148,7 +148,8 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     new ProvidePlugin({
     }),
     new ModuleDependenciesPlugin({
-      'aurelia-testing': ['./compile-spy', './view-spy']
+      'aurelia-testing': ['./compile-spy', './view-spy'],
+      'aurelia-api': ['./aurelia-api']
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',

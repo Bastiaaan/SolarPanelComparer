@@ -15,18 +15,24 @@
     [ApiController]
     public class ProductController : Controller
     {
-        private readonly ProductService productService;
+        private readonly ProductService ProductService;
 
         public ProductController(ProductService productService)
         {
-            this.productService = productService;
+            this.ProductService = productService;
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ObtainProducts()
         {
-            return this.Ok(await this.productService.GetAllProducts());
+            return null; // this.Ok(await this.productService.GetAllProducts());
+        }
+        
+        [HttpPost]
+        public void SaveProduct([FromBody] ProductViewModel jsonValue)
+        {
+            ProductService.AddProduct(jsonValue);
         }
     }
 }
