@@ -22,11 +22,19 @@
             this.productService = productService;
         }
 
-        [HttpGet]
+        [HttpGet("product")]
         [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> ObtainProducts()
+        public async Task<IActionResult> Get()
         {
-            return this.Ok(await this.productService.GetAllProducts());
+            return this.Json(await this.productService.GetAllProducts());
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ProductViewModel), (int)HttpStatusCode.OK)]
+        public IActionResult Post([FromBody]ProductViewModel product)
+        {
+            productService.AddProduct(product);
+            return Ok(product);
         }
     }
 }

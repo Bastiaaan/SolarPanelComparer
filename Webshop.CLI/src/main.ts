@@ -9,7 +9,7 @@ export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature(PLATFORM.moduleName('resources/index'))
-    .plugin('aurelia-api', (config: Config) => {
+    .plugin(PLATFORM.moduleName('aurelia-api'), (config: Config) => {
       config
         .registerEndpoint('api', environment.apiEndpoint)
         .registerEndpoint('identity', environment.identityEndpoint)
@@ -22,5 +22,5 @@ export function configure(aurelia: Aurelia) {
     aurelia.use.developmentLogging(PLATFORM.moduleName('aurelia-testing'));
   }
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }

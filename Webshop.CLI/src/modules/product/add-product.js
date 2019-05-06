@@ -7,23 +7,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject } from 'aurelia-framework';
+import { inject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { ProductViewModel } from '../../models/product-model';
 var Product = (function () {
     function Product(config, ea) {
         this.config = config;
         this.ea = ea;
-        if (config.endpointExists('api') === true)
-            this.api = config.getEndpoint('api');
+        this.api = config.getEndpoint('api');
     }
-    Product.prototype.save = function (product) {
+    Product.prototype.save = function () {
+        debugger;
+        return this.api.create('product', this.product)
+            .then(function (product) {
+            return product;
+        }).catch(function (error) {
+            console.log("error has occured: " + error);
+        });
     };
+    __decorate([
+        bindable,
+        __metadata("design:type", ProductViewModel)
+    ], Product.prototype, "product", void 0);
     Product = __decorate([
-        inject(EventAggregator, Config),
+        inject(Config, EventAggregator),
         __metadata("design:paramtypes", [Config, EventAggregator])
     ], Product);
     return Product;
 }());
 export { Product };
-//# sourceMappingURL=product.js.map
+//# sourceMappingURL=add-product.js.map

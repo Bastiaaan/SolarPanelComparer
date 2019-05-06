@@ -9,9 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { WebAPI } from './web-api';
-import { ContactUpdated, ContactViewed } from './message';
-import { areEqual } from './utility';
+import { WebAPI } from '../../web-api';
+import { ContactUpdated, ContactViewed } from '../../message';
+import { areEqual } from '../../utility';
 var ContactDetail = (function () {
     function ContactDetail(api, ea) {
         this.api = api;

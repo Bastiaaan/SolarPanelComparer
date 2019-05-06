@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoAPI", "DemoAPI\DemoAPI.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Data", "Webshop.Data\Webshop.Data.csproj", "{C8173157-08E0-4D0E-911A-14D347830902}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.CLI", "Webshop.CLI\Webshop.CLI.csproj", "{5B60A991-83B1-4D76-BF72-49D814C63E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Client", "Webshop.CLI\Webshop.Client.csproj", "{5B60A991-83B1-4D76-BF72-49D814C63E9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
