@@ -15,7 +15,7 @@ export class App {
     config.map([
       { route: '',              moduleId: PLATFORM.moduleName('no-selection'),   title: 'Select' },
       { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), name: 'contacts' },
-      { route: 'product', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'product', title: 'new product' }
+      { route: 'product/create', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'new-product', title: 'new product' }
     ]);
 
     this.router = router;
