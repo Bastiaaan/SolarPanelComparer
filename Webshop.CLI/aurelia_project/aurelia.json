@@ -8,7 +8,9 @@
     "attributes": "resources/attributes",
     "modules":  "modules",
     "valueConverters": "resources/value-converters",
-    "bindingBehaviors": "resources/binding-behaviors"
+    "bindingBehaviors": "resources/binding-behaviors",
+    "modules": "modules",
+    "models": "models"
   },
   "transpiler": {
     "id": "typescript",

@@ -1,20 +1,24 @@
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {inject, PLATFORM} from 'aurelia-framework';
-import {WebAPI} from './web-api';
+import { Rest } from 'aurelia-api';
 
-@inject(WebAPI)
+@inject(Rest)
 export class App {
   router: Router;
 
-  constructor(public api: WebAPI) {}
+  constructor(public api: Rest) {}
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Contacten lijst';
+    config.options.root = '/';
+    config.options.pushState = true;
+    config.title = 'Webshop APP';
     config.map([
       { route: '',              moduleId: PLATFORM.moduleName('no-selection'),   title: 'Select' },
-      { route: 'contacts/:id',  moduleId: PLATFORM.moduleName('contact-detail'), name:'contacts' }
+      { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), name: 'contacts' },
+      { route: 'product', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'product', title: 'new product' }
     ]);
 
     this.router = router;
+    this.router.configure(config);
   }
 }

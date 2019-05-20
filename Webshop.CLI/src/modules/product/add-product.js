@@ -9,35 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { inject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
+import { HttpClient } from 'aurelia-fetch-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { ProductViewModel } from './../../models/product-model';
+import { ProductViewModel } from '../../models/product-model';
 var Product = (function () {
-    function Product(config, ea) {
+    function Product(config, ea, _client) {
         this.config = config;
         this.ea = ea;
-        if (config.endpointExists('api') === true)
-            this.api = config.getEndpoint('api');
+        this._client = _client;
+        this.api = config.getEndpoint('api');
+        this.client = _client;
     }
-    Product.prototype.add = function () {
-        this.api.find('product/SaveProduct').then(function (product) {
-            JSON.parse(JSON.stringify(product));
+    Product.prototype.save = function (product) {
+        return this.api.create('/product', this.product)
+            .then(function (product) {
+            return product;
+        }).catch(function (error) {
+            console.log("error has occured: " + error);
         });
-    };
-    Product.prototype.update = function () {
-    };
-    Product.prototype.delete = function () {
-    };
-    Product.prototype.save = function () {
     };
     __decorate([
         bindable,
         __metadata("design:type", ProductViewModel)
     ], Product.prototype, "product", void 0);
     Product = __decorate([
-        inject(EventAggregator, Config),
-        __metadata("design:paramtypes", [Config, EventAggregator])
+        inject(Config, EventAggregator),
+        __metadata("design:paramtypes", [Config, EventAggregator, HttpClient])
     ], Product);
     return Product;
 }());
 export { Product };
-//# sourceMappingURL=product-add.js.map
+//# sourceMappingURL=add-product.js.map

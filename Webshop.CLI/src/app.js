@@ -8,22 +8,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { inject, PLATFORM } from 'aurelia-framework';
-import { WebAPI } from './web-api';
+import { Rest } from 'aurelia-api';
 var App = (function () {
     function App(api) {
         this.api = api;
     }
     App.prototype.configureRouter = function (config, router) {
-        config.title = 'Contacten lijst';
+        config.options.root = '/';
+        config.options.pushState = true;
+        config.title = 'Webshop APP';
         config.map([
             { route: '', moduleId: PLATFORM.moduleName('no-selection'), title: 'Select' },
-            { route: 'contacts/:id', moduleId: PLATFORM.moduleName('contact-detail'), name: 'contacts' }
+            { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), name: 'contacts' },
+            { route: 'product', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'product', title: 'new product' }
         ]);
         this.router = router;
+        this.router.configure(config);
     };
     App = __decorate([
-        inject(WebAPI),
-        __metadata("design:paramtypes", [WebAPI])
+        inject(Rest),
+        __metadata("design:paramtypes", [Rest])
     ], App);
     return App;
 }());

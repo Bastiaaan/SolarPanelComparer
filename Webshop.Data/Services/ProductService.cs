@@ -20,9 +20,9 @@
 
         }
 
-        public IList<Product> GetAllProducts()
+        public async Task<IList<Product>> GetAllProducts()
         {
-            return DbContext.Products.Where(i => i.Id != 0).ToList();
+            return await DbContext.Products.Where(i => i.Id != 0).ToListAsync();
         }
 
         public async Task<Product> GetProductById(long id)
