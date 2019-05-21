@@ -15,6 +15,6 @@
         public string Name { get; set; }
 
         [InverseProperty(nameof(ProductVendor.Product))]
-        public ICollection<ProductVendor> ProductVendors { get; set; }
+        public virtual ICollection<ProductVendor> ProductVendors { get; set; }
     }
 }

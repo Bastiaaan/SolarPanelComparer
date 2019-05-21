@@ -24,10 +24,10 @@
                 .HasKey(keys => new { keys.ProductId, keys.VendorId });
 
             modelBuilder.Entity<ProductVendor>()
-                .HasOne(ic => ic.Product)
-                .WithMany(i => i.ProductVendors)
-                .HasForeignKey(ic => ic.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(ic => ic.Product);
+                //.WithMany(i => i.ProductVendors)
+                //.HasForeignKey(ic => ic.ProductId)
+              //  .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ProductVendor>()
                 .HasOne(ic => ic.Vendor)

@@ -28,7 +28,7 @@
             return await DbContext.Products.FindAsync(id);
         }
 
-        public async Task<bool> AddProduct(ProductViewModel product)
+        public async Task<bool> AddProduct(ProductCreateViewModel product)
         {
             if(product != null)
             {

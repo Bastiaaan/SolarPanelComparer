@@ -1,4 +1,5 @@
-﻿namespace DemoAPI.Controllers
+﻿
+namespace DemoAPI.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -39,8 +40,8 @@
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ProductViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Post([FromBody]ProductViewModel product)
+        [ProducesResponseType(typeof(ProductCreateViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Post([FromBody]ProductCreateViewModel product)
         {
             var result = await this.productService.AddProduct(product);
             if(result)

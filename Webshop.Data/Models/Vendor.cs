@@ -17,6 +17,6 @@ namespace Webshop.Data.Models
         public string Address { get; set; }
 
         [InverseProperty(nameof(ProductVendor.Vendor))]
-        public ICollection<ProductVendor> ProductVendors { get; set; }
+        public virtual ICollection<ProductVendor> ProductVendors { get; set; }
     }
 }

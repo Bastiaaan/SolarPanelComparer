@@ -4,7 +4,7 @@ import { ValidationRules } from 'aurelia-validation';
 
 export class ProductViewModel
 {
-  id: number;
-  name: string;
+  id: number = 0;
+  name: string = null;
 }
 

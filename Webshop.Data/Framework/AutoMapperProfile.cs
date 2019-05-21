@@ -33,5 +33,15 @@
                 this.CreateMap(map.Source, map.Destination);
             }
         }
+
+        private void LoadManyToManyMappings(IEnumerable<Type> types)
+        {
+            var maps = (from t in types
+                        from i in t.GetProperties()
+                        where i.PropertyType == typeof(ICollection<>) && 
+                        i.GetMethod.IsVirtual select t).ToArray();
+
+
+        }
     }
 }

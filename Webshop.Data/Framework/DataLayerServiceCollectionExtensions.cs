@@ -19,7 +19,6 @@
             services.AddTransient<ProductService, ProductService>();
 
             return services;
-
         }
     }
 }
