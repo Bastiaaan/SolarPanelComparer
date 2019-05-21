@@ -8,7 +8,7 @@
     using Webshop.Data.ViewModels;
 
     [Table("Product")]
-    public class Product : IMapFrom<ProductViewModel>
+    public class Product : IMapFrom<ProductViewModel>, IMapFrom<ProductCreateViewModel>
     {
         public int Id { get; set; }
 

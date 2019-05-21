@@ -6,19 +6,22 @@
     using AutoMapper;
     using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
     using Webshop.Data;
-    public class ServiceBase
+    public abstract class ServiceBase
     {
-        protected IConfiguration Configuration { get; set; }
+        protected readonly IConfiguration Configuration;
 
-        protected Context DbContext { get; set; }
+        protected readonly Context DbContext;
 
-        protected IMapper Mapper { get; set; }
+        protected readonly IMapper Mapper;
 
-        public ServiceBase(Context dbContext, IConfiguration configuration, IMapper mapper)
+        protected readonly IConfigurationProvider ConfigurationProvider;
+
+        public ServiceBase(Context dbContext, IConfiguration configuration, IMapper mapper, IConfigurationProvider configurationProvider)
         {
             this.Configuration = configuration;
             this.DbContext = dbContext;
             this.Mapper = mapper;
+            this.ConfigurationProvider = configurationProvider;
         }
     }
 }

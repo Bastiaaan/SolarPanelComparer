@@ -15,10 +15,8 @@
 
     public class ProductService : ServiceBase
     {
-        public ProductService(Context context, IConfiguration configuration, IMapper mapper) : base(context, configuration, mapper)
-        {
-
-        }
+        public ProductService(Context context, IConfiguration configuration, IMapper Mapper, IConfigurationProvider configurationProvider) : base(context, configuration, Mapper, configurationProvider)
+        { }
 
         public async Task<IList<Product>> GetAllProducts()
         {
@@ -30,21 +28,25 @@
             return await DbContext.Products.FindAsync(id);
         }
 
-        public void AddProduct(ProductViewModel product)
+        public async Task<bool> AddProduct(ProductViewModel product)
         {
             if(product != null)
             {
                 try
                 {
-                    Product MappedFromVM = Mapper.Map(product, new Product());
+                    Product MappedFromVM = Mapper.Map<Product>(product);
                     DbContext.Products.Add(MappedFromVM);
-                    DbContext.SaveChanges();
+                    await DbContext.SaveChangesAsync();
+
+                    return true;
                 }
                 catch (SqlException ex)
                 {
                     throw ex;
                 }
             }
+
+            return false;
         }
 
         public void UpdateProduct(ProductViewModel product)

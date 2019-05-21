@@ -1,5 +1,5 @@
 ﻿using DemoAPI.Models;
-using Webshop.Data.Services; // To apply Dependency Injection...
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Webshop.Data;
+using Webshop.Data.Framework; // To apply Dependency Injection...
 
 namespace DemoAPI
 {
@@ -22,12 +23,9 @@ namespace DemoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>();
-            
-            services.AddSingleton<ServiceBase, ProductService>();
-
+            services.AddAutoMapper(typeof(Startup));
+            services.InitializeServices(this.Configuration);
             services.AddMvc(options => options.AllowBindingHeaderValuesToNonStringModelTypes = true).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddCors(o => o.AddPolicy("OurPolicy", builder =>
             {
                 builder.AllowAnyOrigin()

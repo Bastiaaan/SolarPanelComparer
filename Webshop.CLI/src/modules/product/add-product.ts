@@ -14,8 +14,6 @@ export class Product {
     this.api = config.getEndpoint('api');
     this.client = _client;
   } 
-
-
   
   save(product: ProductViewModel): Promise<any> {
     return this.api.create('/product', this.product)
