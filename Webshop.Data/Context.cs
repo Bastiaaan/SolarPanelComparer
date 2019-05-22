@@ -19,7 +19,7 @@
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {/*
             modelBuilder.Entity<ProductVendor>()
                 .HasKey(keys => new { keys.ProductId, keys.VendorId });
 
@@ -34,7 +34,7 @@
                 .WithMany(i => i.ProductVendors)
                 .HasForeignKey(ic => ic.VendorId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
+           */ 
             base.OnModelCreating(modelBuilder);
         }
     }

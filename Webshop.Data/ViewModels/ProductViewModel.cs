@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
     using Webshop.Data.Framework;
     using Webshop.Data.Models;
@@ -11,6 +12,7 @@
 
         public string Name { get; set; }
 
-        //public IEnumerable<ProductVendorViewModel> Vendors { get; set; }
+        [InverseProperty(nameof(ProductVendorViewModel.Product))]
+        public IEnumerable<ProductVendorViewModel> ProductVendors { get; set; }
     }
 }

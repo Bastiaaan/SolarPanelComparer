@@ -5,9 +5,11 @@
     using System.Text;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using Webshop.Data.ViewModels;
+    using Webshop.Data.Framework;
 
     [Table("ProductVendor")]
-    public class ProductVendor
+    public class ProductVendor : IMapFrom<ProductVendorViewModel>
     {
         [Key]
         public int Id { get; set; }

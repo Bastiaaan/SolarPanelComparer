@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
+    using Webshop.Data.Models;
+    using Webshop.Data.ViewModels;
 
     public class AutoMapperProfile : Profile
     {
@@ -13,6 +15,7 @@
             var assembly = typeof(AutoMapperProfile).GetTypeInfo().Assembly;
             var types = assembly.GetExportedTypes();
             this.LoadStandardMappings(types);
+            //this.LoadManyToManyMappings();
         }
 
         private void LoadStandardMappings(IEnumerable<Type> types)
@@ -29,19 +32,17 @@
                         }).ToArray();
 
             foreach(var map in maps)
-            {
+            {     
                 this.CreateMap(map.Source, map.Destination);
             }
         }
 
         private void LoadManyToManyMappings(IEnumerable<Type> types)
         {
-            var maps = (from t in types
-                        from i in t.GetProperties()
-                        where i.PropertyType == typeof(ICollection<>) && 
-                        i.GetMethod.IsVirtual select t).ToArray();
-
-
+            // TODO: 
+            var properties = (from t in types
+                              from i in t.GetProperties()
+                              where i.GetType() == typeof(ICollection<>) select t).ToArray();
         }
     }
 }
