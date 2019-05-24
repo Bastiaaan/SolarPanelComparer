@@ -9,19 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { WebAPI } from './web-api';
-import { ContactViewed, ContactUpdated } from './message';
+import { Config } from 'aurelia-api';
 import { inject } from 'aurelia-framework';
 var ContactList = (function () {
-    function ContactList(api, ea) {
-        var _this = this;
+    function ContactList(config, ea, api) {
+        this.config = config;
+        this.products = [];
+        this.demoApi = config.getEndpoint('api');
         this.api = api;
-        ea.subscribe(ContactViewed, function (msg) { return _this.select(msg.contact); });
-        ea.subscribe(ContactUpdated, function (msg) {
-            var id = msg.contact.id;
-            var found = _this.contacts.find(function (x) { return x.id == id; });
-            Object.assign(found, msg.contact);
-        });
     }
+    ContactList.prototype.obtainProduct = function () {
+        var _this = this;
+        return this.demoApi.find('product', this.products).then(function (data) {
+            _this.products = data;
+            console.log('succeeded');
+        }).catch(function (reason) {
+            console.log(reason);
+        });
+    };
     ContactList.prototype.created = function () {
         var _this = this;
         this.api.getContactList().then(function (contacts) { return _this.contacts = contacts; });
@@ -32,7 +37,7 @@ var ContactList = (function () {
     };
     ContactList = __decorate([
         inject(WebAPI, EventAggregator),
-        __metadata("design:paramtypes", [WebAPI, EventAggregator])
+        __metadata("design:paramtypes", [Config, EventAggregator, WebAPI])
     ], ContactList);
     return ContactList;
 }());

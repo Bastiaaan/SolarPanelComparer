@@ -14,6 +14,7 @@
     {
         public static IServiceCollection InitializeServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAutoMapper();
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("UsedConnection")));
             services.AddTransient<ProductService, ProductService>();

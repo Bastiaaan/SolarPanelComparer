@@ -23,7 +23,6 @@ namespace DemoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
             services.InitializeServices(this.Configuration);
             services.AddMvc(options => options.AllowBindingHeaderValuesToNonStringModelTypes = true).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors(o => o.AddPolicy("OurPolicy", builder =>

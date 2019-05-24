@@ -14,6 +14,6 @@
         public string Name { get; set; }
 
         [InverseProperty(nameof(ProductVendorViewModel.Vendor))]
-        public IEnumerable<ProductVendorViewModel> ProductVendors { get; set; }
+        public ICollection<ProductVendorViewModel> ProductVendors { get; set; }
     }
 }

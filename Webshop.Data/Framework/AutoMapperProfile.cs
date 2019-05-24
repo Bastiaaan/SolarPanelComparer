@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
-    using Webshop.Data.Models;
-    using Webshop.Data.ViewModels;
 
     public class AutoMapperProfile : Profile
     {
@@ -15,7 +13,7 @@
             var assembly = typeof(AutoMapperProfile).GetTypeInfo().Assembly;
             var types = assembly.GetExportedTypes();
             this.LoadStandardMappings(types);
-            //this.LoadManyToManyMappings();
+            this.LoadManyToManyMappings(types);
         }
 
         private void LoadStandardMappings(IEnumerable<Type> types)
@@ -39,10 +37,28 @@
 
         private void LoadManyToManyMappings(IEnumerable<Type> types)
         {
-            // TODO: 
-            var properties = (from t in types
-                              from i in t.GetProperties()
-                              where i.GetType() == typeof(ICollection<>) select t).ToArray();
+            // TODO: Obtain all entities and when two entities has the same ICollection<mtm> property. 
+            var entities = (from t in types
+                              from i in t.GetInterfaces()
+                              where i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>) select t).ToArray();
+            var targetedEntities = new List<Type>();
+            for(int i = 0; i < entities.Length; i++)
+            {
+                var entity = entities[i];
+                var currentProps = entity.GetProperties();
+                for(int j = 0; j < currentProps.Length; j++)
+                {
+                    var currProp = currentProps[j];
+                    var matches = typeof(ICollection<>);
+                    if (currProp == typeof(ICollection<>))
+                    {
+                        targetedEntities.Add(entity);
+                        break;
+                    }
+                }
+            }
+            
+            return;
         }
     }
 }

@@ -16,6 +16,9 @@
 
         public string Name { get; set; }
 
+        [NotMapped]
+        public int AmountOfVendors { get { return this.ProductVendors != null ? this.ProductVendors.Count : 0; } }
+
         [InverseProperty(nameof(ProductVendor.Product))]        
         public virtual ICollection<ProductVendor> ProductVendors { get; set; }
     }

@@ -27,7 +27,7 @@ namespace DemoAPI.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IList<ProductViewModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get()
         {
             var products = await this.productService.GetAllProducts();
@@ -37,6 +37,19 @@ namespace DemoAPI.Controllers
             }
 
             return this.Json("test");
+        }
+
+        [HttpGet("product/{id}")]
+        [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Get(long id)
+        {
+            var result = await this.productService.GetProductById(id);
+            if(result == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok(result);
         }
 
         [HttpPost]

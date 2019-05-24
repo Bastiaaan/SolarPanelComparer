@@ -6,15 +6,14 @@
     using System.Text;
     using Webshop.Data.Framework;
     using Webshop.Data.Models;
-    public class ProductViewModel : IMapFrom<Product>
+
+    public class ProductEditViewModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public int AmountOfVendors { get { return this.ProductVendors.Count; } }
-
-        [InverseProperty(nameof(ProductVendorViewModel.Product))]
-        public ICollection<ProductVendorViewModel> ProductVendors { get; set; }
+        [NotMapped]
+        public string Description { get; set; }
     }
 }

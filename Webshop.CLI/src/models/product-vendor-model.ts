@@ -8,4 +8,5 @@ export class ProductVendorViewModel
   vendor: VendorViewModel = null;
   product: ProductViewModel = null;
   price: number = 0;
+  imageUrl: string = "";
 }

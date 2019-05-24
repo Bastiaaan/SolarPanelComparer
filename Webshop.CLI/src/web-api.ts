@@ -46,7 +46,7 @@ let contacts = [
 export class WebAPI {
   isRequesting = false;
   
-  getContactList(){
+  getContactList() {
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {

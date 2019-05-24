@@ -20,7 +20,8 @@ var App = (function () {
         config.map([
             { route: '', moduleId: PLATFORM.moduleName('no-selection'), title: 'Select' },
             { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), name: 'contacts' },
-            { route: 'product/create', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'new-product', title: 'new product' }
+            { route: 'product/create', moduleId: PLATFORM.moduleName('modules/product/add-product'), nav: true, name: 'new-product', title: 'new product' },
+            { route: 'vendor/create', moduleId: PLATFORM.moduleName('modules/vendor/add-vendor'), nav: true, name: 'new-vendor', title: 'new vendor' }
         ]);
         this.router = router;
         this.router.configure(config);
