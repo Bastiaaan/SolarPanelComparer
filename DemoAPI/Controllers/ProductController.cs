@@ -39,9 +39,9 @@ namespace DemoAPI.Controllers
             return this.Json("test");
         }
 
-        [HttpGet("product/{id}")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Get(long id)
+        public async Task<IActionResult> Get(int id)
         {
             var result = await this.productService.GetProductById(id);
             if(result == null)

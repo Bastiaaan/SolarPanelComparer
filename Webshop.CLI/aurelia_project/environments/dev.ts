@@ -1,6 +1,6 @@
 export default {
   debug: true,
   testing: true,
-  apiEndpoint: "https://localhost:44305/api",
+  apiEndpoint: "https://localhost:44305/api/",
   identityEndpoint: "https://localhost:44305/"
 };

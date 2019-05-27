@@ -2,34 +2,22 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import { WebAPI } from './web-api';
 import { Rest, Config } from 'aurelia-api';
 import {ContactViewed,ContactUpdated} from './message';
-import { inject } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { ProductViewModel } from './models/product-model';
 
-@inject(WebAPI, EventAggregator)
+@autoinject
 export class ContactList {
   contacts;
-  demoApi: Rest;
   selectedId;
-  api: WebAPI;
-  products: Array<ProductViewModel> = [];
 
-
-  constructor(private config: Config, ea: EventAggregator, api: WebAPI) {
-    ea.subscribe(ContactViewed, msg => this.select(msg.contact));
+  constructor(private api: WebAPI, private config: Config, private csAPI: Rest, ea: EventAggregator) {
+    this.csAPI = config.getEndpoint('api');
+    /*ea.subscribe(ContactViewed, msg => this.select(msg.contact));
     ea.subscribe(ContactUpdated, msg => {
       let id = msg.contact.id;
       let found = this.contacts.find(x => x.id == id);
       Object.assign(found, msg.contact);
-    });
-  }
-
-  obtainProduct() {
-    return this.demoApi.find('product', this.products).then((data: Array<ProductViewModel>) => {
-      this.products = data;
-      console.log('succeeded');
-    }).catch(reason => {
-      console.log(reason);
-    });
+    });*/
   }
 
   created() {

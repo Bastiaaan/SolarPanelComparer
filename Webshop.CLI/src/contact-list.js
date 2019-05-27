@@ -9,24 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { WebAPI } from './web-api';
-import { Config } from 'aurelia-api';
-import { inject } from 'aurelia-framework';
+import { Rest, Config } from 'aurelia-api';
+import { autoinject } from 'aurelia-framework';
 var ContactList = (function () {
-    function ContactList(config, ea, api) {
-        this.config = config;
-        this.products = [];
-        this.demoApi = config.getEndpoint('api');
+    function ContactList(api, config, csAPI, ea) {
         this.api = api;
+        this.config = config;
+        this.csAPI = csAPI;
+        this.products = [];
+        this.csAPI = config.getEndpoint('api');
     }
-    ContactList.prototype.obtainProduct = function () {
-        var _this = this;
-        return this.demoApi.find('product', this.products).then(function (data) {
-            _this.products = data;
-            console.log('succeeded');
-        }).catch(function (reason) {
-            console.log(reason);
-        });
-    };
     ContactList.prototype.created = function () {
         var _this = this;
         this.api.getContactList().then(function (contacts) { return _this.contacts = contacts; });
@@ -36,8 +28,8 @@ var ContactList = (function () {
         return true;
     };
     ContactList = __decorate([
-        inject(WebAPI, EventAggregator),
-        __metadata("design:paramtypes", [Config, EventAggregator, WebAPI])
+        autoinject,
+        __metadata("design:paramtypes", [WebAPI, Config, Rest, EventAggregator])
     ], ContactList);
     return ContactList;
 }());

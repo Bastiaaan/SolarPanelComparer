@@ -6,7 +6,7 @@ export function configure(aurelia) {
     aurelia.use
         .standardConfiguration()
         .feature(PLATFORM.moduleName('resources/index'))
-        .plugin(PLATFORM.moduleName('aurelia-api'), function (config) {
+        .plugin('aurelia-api', function (config) {
         config
             .registerEndpoint('api', environment.apiEndpoint)
             .registerEndpoint('identity', environment.identityEndpoint)

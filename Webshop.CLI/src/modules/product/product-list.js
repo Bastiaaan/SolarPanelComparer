@@ -7,27 +7,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Rest, Config } from 'aurelia-api';
-import { EventAggregator } from 'aurelia-event-aggregator';
+import { Config } from 'aurelia-api';
 import { ProductViewModel } from '../../models/product-model';
-import { inject, bindable } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-fetch-client';
+import { bindable, inject } from 'aurelia-framework';
 var productList = (function () {
-    function productList(config, _client) {
+    function productList(config) {
         this.config = config;
-        this._client = _client;
-        this.products = [];
         this.api = config.getEndpoint('api');
-        this.client = _client;
+        this.obtainProduct();
     }
+    productList.prototype.activate = function (params, routeData) {
+        this.obtainProduct();
+    };
     productList.prototype.obtainProduct = function () {
         var _this = this;
-        return this.api.find('product', this.products).then(function (data) {
+        var results = this.api.request('GET', 'product')
+            .then(function (data) {
             _this.products = data;
             console.log('succeeded');
         }).catch(function (reason) {
             console.log(reason);
         });
+        console.log(results);
     };
     productList.prototype.select = function (product) {
         return this.productId = product.id;
@@ -37,8 +38,8 @@ var productList = (function () {
         __metadata("design:type", ProductViewModel)
     ], productList.prototype, "product", void 0);
     productList = __decorate([
-        inject(EventAggregator, Rest),
-        __metadata("design:paramtypes", [Config, HttpClient])
+        inject(Config),
+        __metadata("design:paramtypes", [Config])
     ], productList);
     return productList;
 }());

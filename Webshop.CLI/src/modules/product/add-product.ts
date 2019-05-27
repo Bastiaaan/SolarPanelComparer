@@ -16,7 +16,7 @@ export class Product {
   } 
   
   save(product: ProductViewModel): Promise<any> {
-    return this.api.create('/product', this.product)
+    return this.api.create('product', this.product)
       .then((product: ProductViewModel) => {
         return product;
       }).catch((error: any) => {

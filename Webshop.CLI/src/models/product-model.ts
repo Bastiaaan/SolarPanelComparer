@@ -7,7 +7,7 @@ export class ProductViewModel
 {
   id: number = 0;
   name: string = null;
-  amountOfVendors: number;
-  productVendors: Array<ProductVendorViewModel> = [];
+  amountOfVendors: number = 0;
+  productVendors: Array<ProductVendorViewModel> = null;
 }
 

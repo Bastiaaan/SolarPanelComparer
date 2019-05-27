@@ -1,32 +1,42 @@
 ﻿import { Rest, Config } from 'aurelia-api';
+import { Router } from 'aurelia-router';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { ProductViewModel } from '../../models/product-model';
-import { inject, bindable } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-fetch-client';
+import { autoinject, bindable, inject } from 'aurelia-framework';
 
-@inject(EventAggregator, Rest)
+@inject(Config, Router)
 export class productList {
   @bindable product: ProductViewModel;
+  products;
   api: Rest;
-  products: Array<ProductViewModel> = [];
-  client: HttpClient;
   productId;
 
-  constructor(private config: Config, private _client: HttpClient) {
-    this.api = config.getEndpoint('api');    
-    this.client = _client;
+  constructor(private config: Config) {
+    this.api = config.getEndpoint('api');
+  }
+
+  attached() {
+    this.obtainProduct();
   }
   
   obtainProduct() {
-    return this.api.find('product', this.products).then((data: Array<ProductViewModel>) => {
+    var results = this.api.request('GET', 'product')
+      .then(data => {
       this.products = data;
       console.log('succeeded');
     }).catch(reason => {
       console.log(reason);
-    });
+      });
+
+    console.log(results);
+
   }
 
-  select(product) {
-    return this.productId = product.id;
+  select(product: ProductViewModel) {
+    return this.api.findOne('product', product.id).then((result: ProductViewModel) => {
+      this.product = result;
+    }).catch(reason => {
+      console.log("Something went wrong: " + reason);
+      });
   }
 }

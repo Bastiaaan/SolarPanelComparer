@@ -1,9 +1,10 @@
 ﻿<template>
-  <div class="product-list">
+  <div class="product-list" style="height: 750px; overflow-y: scroll;">
     <ul class="list-group">
       <li repeat.for="product of products" class="list-group-item ${product.id === $parent.productId ? 'active' : ''}">
-        <a route-href="route: products; params.bind: {id:product.id}" click.delegate="$parent.select(product)">
+        <a route-href="route: contacts; params.bind: {id:product.id}" click.delegate="$parent.select(contact)">
           <h4>${product.name}</h4>
+          <p>aanbieders: ${product.amountOfVendors}</p>
         </a>
       </li>
     </ul>

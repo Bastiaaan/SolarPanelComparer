@@ -21,7 +21,7 @@ var Product = (function () {
         this.client = _client;
     }
     Product.prototype.save = function (product) {
-        return this.api.create('/product', this.product)
+        return this.api.create('product', this.product)
             .then(function (product) {
             return product;
         }).catch(function (error) {

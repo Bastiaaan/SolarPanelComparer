@@ -23,7 +23,7 @@
             return await DbContext.Products.Where(i => i.Id != 0).ToListAsync();
         }
 
-        public async Task<Product> GetProductById(long id)
+        public async Task<Product> GetProductById(int id)
         {
             return await DbContext.Products.FindAsync(id);
         }
