@@ -10,7 +10,7 @@ namespace Webshop.Data.Models
     {
         public int Id { get; set; }
 
-        public IList<Product> Product { get; set; }
+        public IList<Product> Products { get; set; }
 
         public DateTime DateOfOrder { get; set; }
 

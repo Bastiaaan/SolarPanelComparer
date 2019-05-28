@@ -41,10 +41,23 @@ namespace DemoAPI.Controllers
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = await this.productService.GetProductById(id);
+            var result = await this.productService.GetProductById<ProductEditViewModel>(id);
             if(result == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok(result);
+        }
+
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Put([FromBody]ProductEditViewModel model)
+        {
+            var result = await this.productService.UpdateProduct(model);
+            if (result == false)
             {
                 return this.BadRequest();
             }

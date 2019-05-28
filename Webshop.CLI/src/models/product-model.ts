@@ -5,9 +5,15 @@ import { ProductVendorViewModel } from './product-vendor-model';
 
 export class ProductViewModel
 {
-  id: number = 0;
+  id: number;
   name: string = null;
-  amountOfVendors: number = 0;
-  productVendors: Array<ProductVendorViewModel> = null;
+  productVendors: Array<ProductVendorViewModel>;
+  amountOfVendors: number = this.productVendors.length;
+}
+
+export class ProductEditViewModel {
+  id: number;
+  name: string;
+  description: string = null;
 }
 

@@ -23,9 +23,10 @@
             return await DbContext.Products.Where(i => i.Id != 0).ToListAsync();
         }
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<T> GetProductById<T>(int id) where T : class
         {
-            return await DbContext.Products.FindAsync(id);
+            var item = await DbContext.Products.SingleOrDefaultAsync(i => id == i.Id);
+            return this.Mapper.Map<T>(item);
         }
 
         public async Task<bool> AddProduct(ProductCreateViewModel product)
@@ -49,7 +50,7 @@
             return false;
         }
 
-        public void UpdateProduct(ProductViewModel product)
+        public async Task<bool> UpdateProduct(ProductEditViewModel product)
         {
             if(product != null)
             {
@@ -58,7 +59,8 @@
                     var mappedProduct = Mapper.Map<Product>(product);
                     DbContext.Products.Update(mappedProduct);
                     DbContext.Entry(mappedProduct).State = EntityState.Modified;
-                    DbContext.SaveChanges();
+                    await DbContext.SaveChangesAsync();
+                    return true;
                 }
                 catch(DbUpdateConcurrencyException ex)
                 {
@@ -70,6 +72,8 @@
                     throw ex;
                 }
             }
+
+            return false;
         }
     }
 }

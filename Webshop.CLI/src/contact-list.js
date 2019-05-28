@@ -16,7 +16,6 @@ var ContactList = (function () {
         this.api = api;
         this.config = config;
         this.csAPI = csAPI;
-        this.products = [];
         this.csAPI = config.getEndpoint('api');
     }
     ContactList.prototype.created = function () {

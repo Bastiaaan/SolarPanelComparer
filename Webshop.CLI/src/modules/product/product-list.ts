@@ -32,7 +32,7 @@ export class productList {
 
   }
 
-  select(product: ProductViewModel) {
+  select(product) {
     return this.api.findOne('product', product.id).then((result: ProductViewModel) => {
       this.product = result;
     }).catch(reason => {

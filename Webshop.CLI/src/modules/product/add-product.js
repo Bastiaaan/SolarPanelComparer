@@ -9,21 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { inject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
-import { HttpClient } from 'aurelia-fetch-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { Router } from 'aurelia-router';
 import { ProductViewModel } from '../../models/product-model';
 var Product = (function () {
-    function Product(config, ea, _client) {
+    function Product(config, ea, router) {
         this.config = config;
         this.ea = ea;
-        this._client = _client;
+        this.router = router;
         this.api = config.getEndpoint('api');
-        this.client = _client;
     }
     Product.prototype.save = function (product) {
+        var _this = this;
         return this.api.create('product', this.product)
             .then(function (product) {
-            return product;
+            _this.router.navigateBack();
         }).catch(function (error) {
             console.log("error has occured: " + error);
         });
@@ -33,8 +33,8 @@ var Product = (function () {
         __metadata("design:type", ProductViewModel)
     ], Product.prototype, "product", void 0);
     Product = __decorate([
-        inject(Config, EventAggregator),
-        __metadata("design:paramtypes", [Config, EventAggregator, HttpClient])
+        inject(Config, EventAggregator, Router),
+        __metadata("design:paramtypes", [Config, EventAggregator, Router])
     ], Product);
     return Product;
 }());

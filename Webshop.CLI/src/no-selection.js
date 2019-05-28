@@ -1,6 +1,6 @@
 var NoSelection = (function () {
     function NoSelection() {
-        this.message = 'Please select a contact:';
+        this.message = 'Please select a product:';
     }
     return NoSelection;
 }());

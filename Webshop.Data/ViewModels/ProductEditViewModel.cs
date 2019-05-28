@@ -13,7 +13,6 @@
 
         public string Name { get; set; }
 
-        [NotMapped]
         public string Description { get; set; }
     }
 }

@@ -8,15 +8,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Config } from 'aurelia-api';
+import { Router } from 'aurelia-router';
 import { ProductViewModel } from '../../models/product-model';
 import { bindable, inject } from 'aurelia-framework';
 var productList = (function () {
     function productList(config) {
         this.config = config;
         this.api = config.getEndpoint('api');
-        this.obtainProduct();
     }
-    productList.prototype.activate = function (params, routeData) {
+    productList.prototype.attached = function () {
         this.obtainProduct();
     };
     productList.prototype.obtainProduct = function () {
@@ -31,14 +31,19 @@ var productList = (function () {
         console.log(results);
     };
     productList.prototype.select = function (product) {
-        return this.productId = product.id;
+        var _this = this;
+        return this.api.findOne('product', product.id).then(function (result) {
+            _this.product = result;
+        }).catch(function (reason) {
+            console.log("Something went wrong: " + reason);
+        });
     };
     __decorate([
         bindable,
         __metadata("design:type", ProductViewModel)
     ], productList.prototype, "product", void 0);
     productList = __decorate([
-        inject(Config),
+        inject(Config, Router),
         __metadata("design:paramtypes", [Config])
     ], productList);
     return productList;

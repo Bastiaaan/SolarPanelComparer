@@ -9,12 +9,14 @@
     using Webshop.Data.ViewModels;
 
     [Table("Product")]
-    public class Product : IMapFrom<ProductViewModel>, IMapFrom<ProductCreateViewModel>
+    public class Product : IMapFrom<ProductViewModel>, IMapFrom<ProductCreateViewModel>, IMapFrom<ProductEditViewModel>
     {
         [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Description { get; set; }
 
         [NotMapped]
         public int AmountOfVendors { get { return this.ProductVendors != null ? this.ProductVendors.Count : 0; } }

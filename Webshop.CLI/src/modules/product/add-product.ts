@@ -2,23 +2,22 @@
 import { Config, Rest } from 'aurelia-api';
 import { HttpClient, json } from 'aurelia-fetch-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { Router } from 'aurelia-router';
 import { ProductViewModel } from '../../models/product-model';
 
-@inject(Config, EventAggregator)
+@inject(Config, EventAggregator, Router)
 export class Product {
   @bindable product: ProductViewModel;
   api: Rest;
-  client: HttpClient;
 
-  constructor(private config: Config, private ea: EventAggregator, private _client: HttpClient) {
+  constructor(private config: Config, private ea: EventAggregator, private router: Router) {
     this.api = config.getEndpoint('api');
-    this.client = _client;
   } 
   
   save(product: ProductViewModel): Promise<any> {
     return this.api.create('product', this.product)
       .then((product: ProductViewModel) => {
-        return product;
+        this.router.navigateBack();
       }).catch((error: any) => {
         console.log("error has occured: " + error);
       });
