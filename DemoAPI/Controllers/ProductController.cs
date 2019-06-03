@@ -41,7 +41,7 @@ namespace DemoAPI.Controllers
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await this.productService.GetProductById<ProductEditViewModel>(id);
             if(result == null)

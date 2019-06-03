@@ -2,27 +2,32 @@
 import { Rest, Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { bindable, inject } from 'aurelia-framework';
+import { bindable, autoinject } from 'aurelia-framework';
 import { areEqual } from '../../utility';
 
-@inject(Config, Router)
+@autoinject
 export class ProductDetails {
   @bindable id: number;
   product: ProductEditViewModel;
   originalProduct: ProductEditViewModel;
   api: Rest;
-  routeConfig;
 
-  constructor(private config: Config, private router: Router) {
+  constructor(private config: Config, private router: Router, private ea: EventAggregator) {
     this.api = config.getEndpoint('api');
   }
 
-  async activate(params, routeConfig) {
-    this.routeConfig = routeConfig;
-    this.id = Number(params.id);
+  activate(params) {
+    this.id = params.id;
     return this.api.findOne('product', this.id).then(data => {
       this.product = data;
       this.originalProduct = data;
+    }).then(() => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          let product = this.product;
+          resolve(JSON.parse(JSON.stringify(product)));
+        }, 200);
+      })
     }).catch(reason => {
       console.log('Could not fetch data: ' + reason);
     });

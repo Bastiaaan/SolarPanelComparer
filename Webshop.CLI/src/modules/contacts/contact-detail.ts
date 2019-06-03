@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {WebAPI} from '../../web-api';
 import {ContactUpdated,ContactViewed} from '../../message';
@@ -10,7 +10,7 @@ interface Contact {
   email: string; 
 }
 
-@inject(WebAPI, EventAggregator)
+@autoinject(WebAPI, EventAggregator)
 export class ContactDetail {
   routeConfig;
   contact: Contact;
@@ -19,7 +19,6 @@ export class ContactDetail {
   constructor(private api: WebAPI, private ea: EventAggregator) {  }
 
   activate(params, routeConfig) {
-    this.routeConfig = routeConfig;
 
     return this.api.getContactDetails(params.id).then(contact => {
       this.contact = <Contact>contact;

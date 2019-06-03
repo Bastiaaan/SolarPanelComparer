@@ -10,13 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { WebAPI } from './web-api';
 import { Rest, Config } from 'aurelia-api';
+import { ContactViewed, ContactUpdated } from './message';
 import { autoinject } from 'aurelia-framework';
 var ContactList = (function () {
     function ContactList(api, config, csAPI, ea) {
+        var _this = this;
         this.api = api;
         this.config = config;
         this.csAPI = csAPI;
         this.csAPI = config.getEndpoint('api');
+        ea.subscribe(ContactViewed, function (msg) { return _this.select(msg.contact); });
+        ea.subscribe(ContactUpdated, function (msg) {
+            var id = msg.contact.id;
+            var found = _this.contacts.find(function (x) { return x.id == id; });
+            Object.assign(found, msg.contact);
+        });
     }
     ContactList.prototype.created = function () {
         var _this = this;

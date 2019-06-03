@@ -1,18 +1,20 @@
 ﻿import { Rest, Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { ProductViewModel } from '../../models/product-model';
-import { autoinject, bindable, inject } from 'aurelia-framework';
+import { ProductViewModel, ProductEditViewModel } from '../../models/product-model';
+import { autoinject, bindable } from 'aurelia-framework';
 
-@inject(Config, Router)
+@autoinject
 export class productList {
-  @bindable product: ProductViewModel;
+  @bindable product: ProductEditViewModel;
   products;
   api: Rest;
-  productId;
+  productId: number;
+  router: Router;
 
-  constructor(private config: Config) {
+  constructor(private config: Config, router: Router) {
     this.api = config.getEndpoint('api');
+    this.router = router;
   }
 
   attached() {
@@ -32,11 +34,8 @@ export class productList {
 
   }
 
-  select(product) {
-    return this.api.findOne('product', product.id).then((result: ProductViewModel) => {
-      this.product = result;
-    }).catch(reason => {
-      console.log("Something went wrong: " + reason);
-      });
+  select(product: ProductViewModel) {
+    this.productId = product.id;
+    this.router.navigate('product', { id: this.productId });
   }
 }

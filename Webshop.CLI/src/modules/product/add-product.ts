@@ -1,11 +1,11 @@
-﻿import { inject, bindable } from 'aurelia-framework';
+﻿import { autoinject, bindable } from 'aurelia-framework';
 import { Config, Rest } from 'aurelia-api';
 import { HttpClient, json } from 'aurelia-fetch-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { ProductViewModel } from '../../models/product-model';
 
-@inject(Config, EventAggregator, Router)
+@autoinject(Config, EventAggregator, Router)
 export class Product {
   @bindable product: ProductViewModel;
   api: Rest;

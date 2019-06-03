@@ -1,4 +1,4 @@
-﻿import { inject, bindable } from 'aurelia-framework';
+﻿import { autoinject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
 import { ValidationRules } from 'aurelia-validation';
 import { ProductVendorViewModel } from './product-vendor-model';

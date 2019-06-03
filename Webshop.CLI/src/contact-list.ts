@@ -12,12 +12,12 @@ export class ContactList {
 
   constructor(private api: WebAPI, private config: Config, private csAPI: Rest, ea: EventAggregator) {
     this.csAPI = config.getEndpoint('api');
-    /*ea.subscribe(ContactViewed, msg => this.select(msg.contact));
+    ea.subscribe(ContactViewed, msg => this.select(msg.contact));
     ea.subscribe(ContactUpdated, msg => {
       let id = msg.contact.id;
       let found = this.contacts.find(x => x.id == id);
       Object.assign(found, msg.contact);
-    });*/
+    });
   }
 
   created() {

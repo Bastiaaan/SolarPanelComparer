@@ -1,8 +1,8 @@
 import {Router, RouterConfiguration} from 'aurelia-router';
-import {inject, PLATFORM} from 'aurelia-framework';
+import {autoinject, PLATFORM} from 'aurelia-framework';
 import { Rest } from 'aurelia-api';
 
-@inject(Rest)
+@autoinject(Rest)
 export class App {
   router: Router;
 
