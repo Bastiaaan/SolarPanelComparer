@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject, bindable } from 'aurelia-framework';
+import { autoinject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
@@ -33,7 +33,7 @@ var Product = (function () {
         __metadata("design:type", ProductViewModel)
     ], Product.prototype, "product", void 0);
     Product = __decorate([
-        inject(Config, EventAggregator, Router),
+        autoinject(Config, EventAggregator, Router),
         __metadata("design:paramtypes", [Config, EventAggregator, Router])
     ], Product);
     return Product;

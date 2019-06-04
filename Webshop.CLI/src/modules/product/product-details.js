@@ -19,31 +19,39 @@ var ProductDetails = (function () {
         this.ea = ea;
         this.api = config.getEndpoint('api');
     }
-    ProductDetails.prototype.activate = function (params, routeConfig) {
-        this.id = params.id;
-        this.select(this.id);
-    };
-    ProductDetails.prototype.select = function (id) {
+    ProductDetails.prototype.activate = function (params) {
         var _this = this;
-        var dat = this.api.findOne('product', id).then(function (data) {
+        this.id = params.id;
+        return this.api.findOne('product', this.id).then(function (data) {
             _this.product = data;
-            _this.originalProduct = data;
+            _this.originalProduct = JSON.parse(JSON.stringify(_this.product));
+        }).then(function () {
+            return new Promise(function (resolve) {
+                setTimeout(function () {
+                    var product = _this.product;
+                    resolve(JSON.parse(JSON.stringify(product)));
+                }, 200);
+            });
         }).catch(function (reason) {
             console.log('Could not fetch data: ' + reason);
         });
-        debugger;
     };
     ProductDetails.prototype.canSave = function () {
         return !areEqual(this.product, this.originalProduct);
     };
     ProductDetails.prototype.save = function () {
         var _this = this;
-        if (this.canSave() === true) {
-            this.api.update('product', this.product).then(function (model) {
-                _this.router.navigateBack();
+        debugger;
+        if (!areEqual(this.product, this.originalProduct)) {
+            this.api.update('product', this.product.id).then(function (model) {
+                _this.router.navigateToRoute('/');
             }).catch(function (reason) {
                 console.log(reason);
             });
+        }
+        else {
+            debugger;
+            console.log(JSON.parse('From form: ' + this.product) + ' original: ' + JSON.parse(JSON.stringify(this.originalProduct)));
         }
     };
     __decorate([

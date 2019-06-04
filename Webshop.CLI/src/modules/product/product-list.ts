@@ -36,6 +36,6 @@ export class productList {
 
   select(product: ProductViewModel) {
     this.productId = product.id;
-    this.router.navigate('product', { id: this.productId });
+    this.router.navigateToRoute('product', { id: this.productId });
   }
 }

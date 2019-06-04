@@ -20,7 +20,7 @@ export class ProductDetails {
     this.id = params.id;
     return this.api.findOne('product', this.id).then(data => {
       this.product = data;
-      this.originalProduct = data;
+      this.originalProduct = JSON.parse(JSON.stringify(this.product));
     }).then(() => {
       return new Promise(resolve => {
         setTimeout(() => {
@@ -38,12 +38,15 @@ export class ProductDetails {
   }
 
   save() {
-    if (this.canSave() === true) {
-      this.api.update('product', this.product).then(model => {
-        this.router.navigateBack();
+    if (!areEqual(JSON.parse(JSON.stringify(this.product)), this.originalProduct)) {
+      this.api.updateOne('product', this.product.id, null, this.product).then(model => {
+        this.router.navigateToRoute('/');
       }).catch(reason => {
         console.log(reason);
       });
+    } else {
+      debugger;
+      console.log(JSON.parse('From form: '+this.product)+' original: '+JSON.parse(JSON.stringify(this.originalProduct)));
     }
   }
 }

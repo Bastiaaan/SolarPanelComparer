@@ -52,10 +52,14 @@ namespace DemoAPI.Controllers
             return this.Ok(result);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:long}")]
         [ProducesResponseType(typeof(ProductEditViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Put([FromBody]ProductEditViewModel model)
+        public async Task<IActionResult> Put(long id, [FromBody]ProductEditViewModel model)
         {
+            if(id != model.Id)
+            {
+                return this.BadRequest("Invalid product");
+            }
             var result = await this.productService.UpdateProduct(model);
             if (result == false)
             {

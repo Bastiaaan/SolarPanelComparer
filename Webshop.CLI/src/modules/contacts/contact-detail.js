@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { WebAPI } from '../../web-api';
 import { ContactUpdated, ContactViewed } from '../../message';
@@ -19,7 +19,6 @@ var ContactDetail = (function () {
     }
     ContactDetail.prototype.activate = function (params, routeConfig) {
         var _this = this;
-        this.routeConfig = routeConfig;
         return this.api.getContactDetails(params.id).then(function (contact) {
             _this.contact = contact;
             _this.routeConfig.navModel.setTitle(_this.contact.firstName);
@@ -54,7 +53,7 @@ var ContactDetail = (function () {
         return true;
     };
     ContactDetail = __decorate([
-        inject(WebAPI, EventAggregator),
+        autoinject(WebAPI, EventAggregator),
         __metadata("design:paramtypes", [WebAPI, EventAggregator])
     ], ContactDetail);
     return ContactDetail;

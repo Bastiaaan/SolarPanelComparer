@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
-import { ProductViewModel } from '../../models/product-model';
-import { bindable, inject } from 'aurelia-framework';
+import { ProductEditViewModel } from '../../models/product-model';
+import { autoinject, bindable } from 'aurelia-framework';
 var productList = (function () {
-    function productList(config) {
+    function productList(config, router) {
         this.config = config;
         this.api = config.getEndpoint('api');
+        this.router = router;
     }
     productList.prototype.attached = function () {
         this.obtainProduct();
@@ -31,20 +32,16 @@ var productList = (function () {
         console.log(results);
     };
     productList.prototype.select = function (product) {
-        var _this = this;
-        return this.api.findOne('product', product.id).then(function (result) {
-            _this.product = result;
-        }).catch(function (reason) {
-            console.log("Something went wrong: " + reason);
-        });
+        this.productId = product.id;
+        this.router.navigateToRoute('product', { id: this.productId });
     };
     __decorate([
         bindable,
-        __metadata("design:type", ProductViewModel)
+        __metadata("design:type", ProductEditViewModel)
     ], productList.prototype, "product", void 0);
     productList = __decorate([
-        inject(Config, Router),
-        __metadata("design:paramtypes", [Config])
+        autoinject,
+        __metadata("design:paramtypes", [Config, Router])
     ], productList);
     return productList;
 }());

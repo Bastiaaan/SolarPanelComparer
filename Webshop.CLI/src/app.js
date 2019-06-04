@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject, PLATFORM } from 'aurelia-framework';
+import { autoinject, PLATFORM } from 'aurelia-framework';
 import { Rest } from 'aurelia-api';
 var App = (function () {
     function App(api) {
@@ -28,7 +28,7 @@ var App = (function () {
         this.router.configure(config);
     };
     App = __decorate([
-        inject(Rest),
+        autoinject(Rest),
         __metadata("design:paramtypes", [Rest])
     ], App);
     return App;
