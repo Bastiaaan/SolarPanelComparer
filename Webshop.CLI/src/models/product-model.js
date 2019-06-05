@@ -1,6 +1,6 @@
 var ProductViewModel = (function () {
     function ProductViewModel() {
-        this.name = null;
+        this.description = null;
         this.amountOfVendors = this.productVendors.length;
     }
     return ProductViewModel;

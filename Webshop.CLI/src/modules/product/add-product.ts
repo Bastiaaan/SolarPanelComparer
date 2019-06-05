@@ -5,19 +5,27 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { ProductViewModel } from '../../models/product-model';
 
-@autoinject(Config, EventAggregator, Router)
-export class Product {
-  @bindable product: ProductViewModel;
+@autoinject
+export class AddProduct {
+  product: ProductViewModel;
   api: Rest;
 
   constructor(private config: Config, private ea: EventAggregator, private router: Router) {
     this.api = config.getEndpoint('api');
   } 
+
+  attached() {
+    console.log('I am here!');
+  }
+
+  detached() {
+
+  }
   
   save(product: ProductViewModel): Promise<any> {
     return this.api.create('product', this.product)
-      .then((product: ProductViewModel) => {
-        this.router.navigateBack();
+      .then(product => {
+        this.router.navigateToRoute('products');
       }).catch((error: any) => {
         console.log("error has occured: " + error);
       });

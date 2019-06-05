@@ -10,8 +10,8 @@ using Webshop.Data;
 namespace Webshop.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190501112434_Initial_Point")]
-    partial class Initial_Point
+    [Migration("20190604125053_Initialization")]
+    partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,25 @@ namespace Webshop.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Webshop.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName");
+
+                    b.Property<byte[]>("ImageData");
+
+                    b.Property<int>("ImageSize");
+
+                    b.Property<string>("MimeType");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image");
+                });
 
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
@@ -49,6 +68,8 @@ namespace Webshop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
@@ -124,7 +145,7 @@ namespace Webshop.Data.Migrations
             modelBuilder.Entity("Webshop.Data.Models.Product", b =>
                 {
                     b.HasOne("Webshop.Data.Models.Order")
-                        .WithMany("Product")
+                        .WithMany("Products")
                         .HasForeignKey("OrderId");
                 });
 

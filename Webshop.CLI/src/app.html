@@ -1,6 +1,5 @@
 <template>
   <require from="./styles.css"></require>
-  <!--<require from="./bootstrap/dist/css/bootstrap.css"></require>-->
   <require from="./modules/product/product-list"></require>
   <require from="./contact-list"></require>
 
@@ -8,19 +7,13 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
         <i class="fa fa-user"></i>
-        <span>Select a product</span>
+        <span>Paneelformeel</span>
       </a>
     </div>
   </nav>
 
   <loading-indicator loading.bind="router.isNavigating || api.isRequesting"></loading-indicator>
-
-  <div class="container">
-    <div class="row">
-      <product-list class="col-md-5"></product-list>
-      <router-view class="col-md-7"></router-view>
-    </div>
-  </div>
+  <router-view></router-view>
 </template>
 
 

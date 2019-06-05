@@ -41,9 +41,8 @@ var ProductDetails = (function () {
     };
     ProductDetails.prototype.save = function () {
         var _this = this;
-        debugger;
-        if (!areEqual(this.product, this.originalProduct)) {
-            this.api.update('product', this.product.id).then(function (model) {
+        if (!areEqual(JSON.parse(JSON.stringify(this.product)), this.originalProduct)) {
+            this.api.updateOne('product', this.product.id, null, this.product).then(function (model) {
                 _this.router.navigateToRoute('/');
             }).catch(function (reason) {
                 console.log(reason);
@@ -53,6 +52,9 @@ var ProductDetails = (function () {
             debugger;
             console.log(JSON.parse('From form: ' + this.product) + ' original: ' + JSON.parse(JSON.stringify(this.originalProduct)));
         }
+    };
+    ProductDetails.prototype.navigateBack = function () {
+        this.router.navigateBack();
     };
     __decorate([
         bindable,

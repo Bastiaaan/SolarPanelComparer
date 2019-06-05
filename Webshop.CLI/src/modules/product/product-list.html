@@ -1,12 +1,28 @@
 ﻿<template>
-  <div class="product-list" style="height: 750px; overflow-y: scroll;">
-    <ul class="list-group">
-      <li repeat.for="product of products" class="list-group-item ${product.id === $parent.productId ? 'active' : ''}">
-        <a route-href="route: product; params.bind: {id:product.id}" click.trigger="$parent.select(product)">
-          <h4>${product.name}</h4>
-          <p>aanbieders: ${product.amountOfVendors}</p>
-        </a>
-      </li>
-    </ul>
+  <require from="./add-product"></require>
+  <require from="./product-details"></require>
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <div class="product-list" style="height: 750px; overflow-y: scroll;">
+          <ul class="list-group">
+            <li repeat.for="product of products" class="list-group-item ${product.id === $parent.productId ? 'active' : ''}">
+              <a route-href="route: product; params.bind: {id:product.id}" click.trigger="$parent.select(product)">
+                <h4>${product.name}</h4>
+                <p>aanbieders: ${product.amountOfVendors}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-8">
+        <div>
+          <add-product></add-product>
+        </div>
+        <div>
+          <product-details bind.id="id"></product-details>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -7,36 +7,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { autoinject, bindable } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
-import { ProductViewModel } from '../../models/product-model';
-var Product = (function () {
-    function Product(config, ea, router) {
+var AddProduct = (function () {
+    function AddProduct(config, ea, router) {
         this.config = config;
         this.ea = ea;
         this.router = router;
         this.api = config.getEndpoint('api');
     }
-    Product.prototype.save = function (product) {
+    AddProduct.prototype.attached = function () {
+        console.log('I am here!');
+    };
+    AddProduct.prototype.detached = function () {
+    };
+    AddProduct.prototype.save = function (product) {
         var _this = this;
         return this.api.create('product', this.product)
             .then(function (product) {
-            _this.router.navigateBack();
+            _this.router.navigateToRoute('products');
         }).catch(function (error) {
             console.log("error has occured: " + error);
         });
     };
-    __decorate([
-        bindable,
-        __metadata("design:type", ProductViewModel)
-    ], Product.prototype, "product", void 0);
-    Product = __decorate([
-        autoinject(Config, EventAggregator, Router),
+    AddProduct = __decorate([
+        autoinject,
         __metadata("design:paramtypes", [Config, EventAggregator, Router])
-    ], Product);
-    return Product;
+    ], AddProduct);
+    return AddProduct;
 }());
-export { Product };
+export { AddProduct };
 //# sourceMappingURL=add-product.js.map

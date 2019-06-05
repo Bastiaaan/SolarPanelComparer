@@ -6,7 +6,8 @@ import { ProductVendorViewModel } from './product-vendor-model';
 export class ProductViewModel
 {
   id: number;
-  name: string = null;
+  name: string;
+  description: string = null;
   productVendors: Array<ProductVendorViewModel>;
   amountOfVendors: number = this.productVendors.length;
 }

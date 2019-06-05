@@ -49,4 +49,8 @@ export class ProductDetails {
       console.log(JSON.parse('From form: '+this.product)+' original: '+JSON.parse(JSON.stringify(this.originalProduct)));
     }
   }
+
+  navigateBack() {
+    this.router.navigateBack();
+  }
 }

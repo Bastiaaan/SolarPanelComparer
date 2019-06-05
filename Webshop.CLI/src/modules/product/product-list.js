@@ -17,7 +17,7 @@ var productList = (function () {
         this.api = config.getEndpoint('api');
         this.router = router;
     }
-    productList.prototype.attached = function () {
+    productList.prototype.activate = function () {
         this.obtainProduct();
     };
     productList.prototype.obtainProduct = function () {

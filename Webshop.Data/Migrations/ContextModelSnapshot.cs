@@ -19,6 +19,25 @@ namespace Webshop.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Webshop.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName");
+
+                    b.Property<byte[]>("ImageData");
+
+                    b.Property<int>("ImageSize");
+
+                    b.Property<string>("MimeType");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image");
+                });
+
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -47,6 +66,8 @@ namespace Webshop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
@@ -122,7 +143,7 @@ namespace Webshop.Data.Migrations
             modelBuilder.Entity("Webshop.Data.Models.Product", b =>
                 {
                     b.HasOne("Webshop.Data.Models.Order")
-                        .WithMany("Product")
+                        .WithMany("Products")
                         .HasForeignKey("OrderId");
                 });
 

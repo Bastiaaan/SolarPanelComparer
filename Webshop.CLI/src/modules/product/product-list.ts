@@ -17,7 +17,7 @@ export class productList {
     this.router = router;
   }
 
-  attached() {
+  activate() {
     this.obtainProduct();
   }
   

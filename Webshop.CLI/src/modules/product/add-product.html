@@ -5,7 +5,11 @@
       <input type="hidden" value.bind="0" />
       <div class="form-group">
         <label>Product naam</label>
-        <input type="text" class="form-control" value.bind="product.name"/>
+        <input type="text" class="form-control" value.bind="product.name" />
+      </div>
+      <div class="form-group">
+        <label>Product beschrijving</label>
+        <textarea type="text" class="form-control" value.bind="product.description"></textarea>
       </div>
       <div class="form-group">
         <button class="btn btn-success float-left" click.delegate="save()">Opslaan</button>

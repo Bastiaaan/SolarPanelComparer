@@ -42,31 +42,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { AppRouterConfig } from './services/router-config';
-import { autoinject } from 'aurelia-framework';
-import { Rest } from 'aurelia-api';
-var App = (function () {
-    function App(api, routerConfig) {
-        this.api = api;
-        this.routerConfig = routerConfig;
+import { Router } from 'aurelia-router';
+import { autoinject, PLATFORM } from 'aurelia-framework';
+var AppRouterConfig = (function () {
+    function AppRouterConfig(router) {
+        this.router = router;
     }
-    App.prototype.activate = function () {
+    AppRouterConfig.prototype.configure = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var routerConfig;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.routerConfig.configure()];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
+                routerConfig = function (config) {
+                    config.options.root = '/';
+                    config.options.pushState = true;
+                    config.title = 'Webshop APP';
+                    config.map([
+                        { route: ['', '/', '#', 'home', '/home'], moduleId: PLATFORM.moduleName('home'), name: 'home', nav: false, title: 'home' },
+                        { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), nav: false, name: 'contacts' },
+                        { route: 'vendors', moduleId: PLATFORM.moduleName('modules/vendor/vendor-list'), nav: true, name: 'vendors', title: 'overview' },
+                        { route: 'products', moduleId: PLATFORM.moduleName('modules/product/product-list'), nav: true, name: 'products', title: 'overview' },
+                        { route: 'product/:id', moduleId: PLATFORM.moduleName('modules/product/product-details'), nav: false, name: 'product', title: 'check product' }
+                    ]);
+                    return config;
+                };
+                this.router.configure(routerConfig);
+                return [2];
             });
         });
     };
-    App = __decorate([
+    AppRouterConfig = __decorate([
         autoinject,
-        __metadata("design:paramtypes", [Rest, AppRouterConfig])
-    ], App);
-    return App;
+        __metadata("design:paramtypes", [Router])
+    ], AppRouterConfig);
+    return AppRouterConfig;
 }());
-export { App };
-//# sourceMappingURL=app.js.map
+export { AppRouterConfig };
+//# sourceMappingURL=router-config.js.map
