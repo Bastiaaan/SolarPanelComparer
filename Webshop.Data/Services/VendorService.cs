@@ -13,6 +13,7 @@
     using Webshop.Data.Services;
     using Webshop.Data.ViewModels;
     using System.Data.SqlClient;
+    using System.IO;
 
     public class VendorService : ServiceBase
     {
@@ -35,11 +36,16 @@
             return null;
         }
 
-        public async Task<bool> Create(Vendor vendor)
+        public async Task<bool> Create(VendorCreateViewModel vendor)
         {
+            var mappedFrom = this.Mapper.Map<Vendor>(vendor);
             try
             {
-                DbContext.Vendors.Add(vendor);
+                if(vendor.DefaultImage != null)
+                {
+                    File.Create(vendor.DefaultImage.FileName);
+                }
+                DbContext.Vendors.Add(mappedFrom);
                 await DbContext.SaveChangesAsync();
                 return true;
             }

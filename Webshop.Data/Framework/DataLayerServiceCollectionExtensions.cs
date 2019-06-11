@@ -8,6 +8,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
+    using Webshop.Data.Models;
     using Webshop.Data.Services;
 
     public static class DataLayerServiceCollectionExtensions 
@@ -18,6 +19,9 @@
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("UsedConnection")));
             services.AddTransient<ProductService, ProductService>();
+            services.AddTransient<VendorService, VendorService>();
+            services.AddTransient<ImageService<ProductImage>, ImageService<ProductImage>>();
+            services.AddTransient<ImageService<VendorImage>, ImageService<VendorImage>>();
 
             return services;
         }

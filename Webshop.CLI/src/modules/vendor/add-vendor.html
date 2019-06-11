@@ -1,1 +1,19 @@
-﻿
+﻿<template>
+  <div class="container">
+    <h2>Nieuw verkoper toevoegen</h2>
+    <form role="form">
+      <input type="hidden" value.bind="0" />
+      <div class="form-group">
+        <label>Naam verkoper</label>
+        <input type="text" class="form-control" value.bind="toInsert.name" />
+      </div>
+      <div class="form-group">
+        <label>Adres verkoper</label>
+        <textarea type="text" class="form-control" value.bind="toInsert.address"></textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success float-left" click.delegate="save()">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</template>

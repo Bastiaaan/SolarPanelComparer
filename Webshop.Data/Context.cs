@@ -14,11 +14,13 @@
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<ProductImage> ProductImages { get; set; }
+
+        public DbSet<VendorImage> VendorImages { get; set; }
+
         public DbSet<Vendor> Vendors { get; set; }
 
         public DbSet<User> Users { get; set; }
-
-        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

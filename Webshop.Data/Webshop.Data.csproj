@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20190501110548_SupplierRenamedToVendorAndPropertiesMovedToProductVendor.cs" />
     <Compile Remove="Migrations\20190501111448_SupplierRenamedToVendorAndPropertiesMovedToProductVendor.cs" />
     <Compile Remove="Migrations\20190501112400_SupplierRenamedToVendorAndPropertiesMovedToProductVendor.cs" />
+    <Compile Remove="Migrations\20190611130537_ResetWithRemovingImageProperty.cs" />
+    <Compile Remove="Migrations\20190611131219_ForeachOwnEntityAnImagetableInitialized.cs" />
   </ItemGroup>
 
   <ItemGroup>

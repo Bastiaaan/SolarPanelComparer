@@ -1,1 +1,22 @@
-﻿
+﻿<template>
+  <require from="./add-vendor"></require>
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-12">
+        <add-vendor></add-vendor>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <ul class="vendors">
+          <li repeat.for="vendor of vendors" class="list-group-item ${vendor.id === $parent.vendorId ? 'active' : ''}" click.trigger="select(vendor)">
+            <h4>${vendor.name}</h4>
+          </li>
+        </ul>
+      </div>
+      <div class="col-7">
+
+      </div>
+    </div>
+  </div>
+</template>

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
+using Webshop.Data.Framework;
+using Webshop.Data.ViewModels;
 
 namespace Webshop.Data.Models
 {
     [Table("Vendor")]
-    public class Vendor
+    public class Vendor : IMapFrom<VendorCreateViewModel>, IMapFrom<VendorEditViewModel>
     {
         [Key]
         public int Id { get; set; }

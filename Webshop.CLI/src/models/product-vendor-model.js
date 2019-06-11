@@ -6,6 +6,7 @@ var ProductVendorViewModel = (function () {
         this.product = null;
         this.price = 0;
         this.imageUrl = "";
+        this.productImages = [];
     }
     return ProductVendorViewModel;
 }());

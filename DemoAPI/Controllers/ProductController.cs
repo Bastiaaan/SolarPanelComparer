@@ -10,6 +10,7 @@ namespace DemoAPI.Controllers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Webshop.Data;
+    using Webshop.Data.Models;
     using Webshop.Data.Services;
     using Webshop.Data.ViewModels;
 
@@ -18,12 +19,14 @@ namespace DemoAPI.Controllers
     public class ProductController : Controller
     {
         private readonly ProductService productService;
+        private readonly ImageService<ProductImage> imageService;
         private readonly IMapper autoMapper;
 
-        public ProductController(ProductService productService, IMapper mapper)
+        public ProductController(ProductService productService, IMapper mapper, ImageService<ProductImage> imageService)
         {
             this.productService = productService;
             this.autoMapper = mapper;
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -36,7 +39,7 @@ namespace DemoAPI.Controllers
                 return this.Ok(products);
             }
 
-            return this.Json("test");
+            return this.NotFound();
         }
 
         [HttpGet("{id:int}")]
@@ -46,7 +49,7 @@ namespace DemoAPI.Controllers
             var result = await this.productService.GetProductById<ProductEditViewModel>(id);
             if(result == null)
             {
-                return this.BadRequest();
+                return this.NotFound();
             }
 
             return this.Ok(result);

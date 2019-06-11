@@ -5,9 +5,13 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
+    using Webshop.Data.Framework;
+    using Webshop.Data.Models;
+    using Webshop.Data.Models.Enums;
+    using Webshop.Data.ViewModels;
 
-    [Table("Image")]
-    public class Image
+    [NotMapped]
+    public abstract class Image
     {
         [Key]
         public int Id { get; set; }

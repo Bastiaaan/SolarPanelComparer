@@ -18,12 +18,14 @@
     public class VendorController : Controller
     {
         private readonly VendorService service;
+        private readonly ImageService<VendorImage> imageService;
         private readonly IMapper mapper;
 
-        public VendorController(VendorService service, IMapper mapper)
+        public VendorController(VendorService service, IMapper mapper, ImageService<VendorImage> imageService)
         {
             this.service = service;
             this.mapper = mapper;
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -36,7 +38,7 @@
                 return this.Ok(vendors);
             }
 
-            return this.Json("Geen verkopers gevonden");
+            return this.NotFound();
         }
 
         [HttpGet("{id:int}")]
@@ -49,7 +51,7 @@
                 return this.Ok(vendor);
             }
 
-            return this.Json("Niet gevonden");
+            return this.NotFound();
         }
 
         [HttpGet("{id:int}")]
@@ -62,7 +64,7 @@
                 return this.Ok(vendor);
             }
 
-            return this.Json("Niet gevonden");
+            return this.NotFound();
         }
 
         [HttpPut("{id:int}")]
@@ -81,20 +83,20 @@
                 return this.BadRequest(vendor);
             }
 
-            return this.Json("Niet gevonden");
+            return this.NotFound();
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(VendorViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Post([FromBody] VendorCreateViewModel vendor)
+        [ProducesResponseType(typeof(VendorCreateViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Post([FromBody]VendorCreateViewModel vendor)
         {
-            var isCreated = await this.service.Create(this.mapper.Map<Vendor>(vendor));
+            var isCreated = await this.service.Create(vendor);
             if (isCreated)
             {
-                return this.Created("api/vendor", vendor);
+                return this.Created("api/vendor/", vendor);
             }
 
-            return this.BadRequest("Niet gevonden");
+            return this.NotFound();
         }
     }
 }

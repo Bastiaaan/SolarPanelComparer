@@ -22,9 +22,9 @@ export class AddProduct {
 
   }
   
-  save(product: ProductViewModel): Promise<any> {
+  save(): Promise<any> {
     return this.api.create('product', this.product)
-      .then(product => {
+      .then(() => {
         this.router.navigateToRoute('products');
       }).catch((error: any) => {
         console.log("error has occured: " + error);

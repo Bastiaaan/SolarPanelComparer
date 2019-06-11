@@ -1,5 +1,6 @@
 ﻿import { VendorViewModel } from "./Vendor-model";
 import { ProductViewModel } from "./product-model";
+import { ImageViewModel } from "./image-model";
 
 export class ProductVendorViewModel
 {
@@ -9,4 +10,5 @@ export class ProductVendorViewModel
   product: ProductViewModel = null;
   price: number = 0;
   imageUrl: string = "";
+  productImages: Array<ImageViewModel> = [];
 }

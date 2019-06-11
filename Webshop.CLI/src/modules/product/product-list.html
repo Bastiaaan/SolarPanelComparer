@@ -2,6 +2,11 @@
   <require from="./add-product"></require>
   <require from="./product-details"></require>
   <div class="container">
+    <div class="row mb-2">      
+      <div class="col-12">
+        <add-product></add-product>      
+      </div>
+    </div>
     <div class="row">
       <div class="col-4">
         <div class="product-list" style="height: 750px; overflow-y: scroll;">
@@ -16,9 +21,6 @@
         </div>
       </div>
       <div class="col-8">
-        <div>
-          <add-product></add-product>
-        </div>
         <div>
           <product-details bind.id="id"></product-details>
         </div>

@@ -9,7 +9,8 @@
         static void Main(string[] args)
         {
             var ServiceProvider = new ServiceCollection()
-                .AddTransient<ServiceBase, ProductService>();
+                .AddTransient<ServiceBase, ProductService>()
+                .AddTransient<ServiceBase, VendorService>();
             Console.WriteLine("Hello World!");
             Console.ReadLine();
         }

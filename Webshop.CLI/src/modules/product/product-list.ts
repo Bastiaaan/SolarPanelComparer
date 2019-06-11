@@ -34,7 +34,7 @@ export class productList {
 
   }
 
-  select(product: ProductViewModel) {
+  select(product: ProductEditViewModel) {
     this.productId = product.id;
     this.router.navigateToRoute('product', { id: this.productId });
   }

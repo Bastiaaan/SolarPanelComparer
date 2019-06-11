@@ -1,7 +1,7 @@
 var ProductViewModel = (function () {
     function ProductViewModel() {
         this.description = null;
-        this.amountOfVendors = this.productVendors.length;
+        this.vendors = this.productVendors.length;
     }
     return ProductViewModel;
 }());

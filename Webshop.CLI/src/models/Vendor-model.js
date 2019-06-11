@@ -7,4 +7,10 @@ var VendorViewModel = (function () {
     return VendorViewModel;
 }());
 export { VendorViewModel };
+var VendorEditViewModel = (function () {
+    function VendorEditViewModel() {
+    }
+    return VendorEditViewModel;
+}());
+export { VendorEditViewModel };
 //# sourceMappingURL=Vendor-model.js.map

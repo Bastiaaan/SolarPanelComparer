@@ -23,10 +23,10 @@ var AddProduct = (function () {
     };
     AddProduct.prototype.detached = function () {
     };
-    AddProduct.prototype.save = function (product) {
+    AddProduct.prototype.save = function () {
         var _this = this;
         return this.api.create('product', this.product)
-            .then(function (product) {
+            .then(function () {
             _this.router.navigateToRoute('products');
         }).catch(function (error) {
             console.log("error has occured: " + error);
