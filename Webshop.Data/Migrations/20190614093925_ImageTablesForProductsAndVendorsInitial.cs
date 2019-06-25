@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop.Data.Migrations
 {
-    public partial class TwoInheritedImageEntitiesVendorAndProduct2 : Migration
+    public partial class ImageTablesForProductsAndVendorsInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,6 @@ namespace Webshop.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ForeignEntities = table.Column<int>(nullable: false),
                     ImageData = table.Column<byte[]>(nullable: true),
                     FileName = table.Column<string>(nullable: true),
                     ImageSize = table.Column<int>(nullable: false),
@@ -38,7 +37,6 @@ namespace Webshop.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ForeignEntities = table.Column<int>(nullable: false),
                     ImageData = table.Column<byte[]>(nullable: true),
                     FileName = table.Column<string>(nullable: true),
                     ImageSize = table.Column<int>(nullable: false),

@@ -20,8 +20,7 @@
                 options.UseSqlServer(configuration.GetConnectionString("UsedConnection")));
             services.AddTransient<ProductService, ProductService>();
             services.AddTransient<VendorService, VendorService>();
-            services.AddTransient<ImageService<ProductImage>, ImageService<ProductImage>>();
-            services.AddTransient<ImageService<VendorImage>, ImageService<VendorImage>>();
+            services.AddTransient<ImageService, ImageService>();
 
             return services;
         }

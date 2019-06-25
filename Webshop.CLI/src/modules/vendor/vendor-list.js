@@ -10,12 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { VendorViewModel } from '../../models/Vendor-model';
 import { autoinject, bindable } from 'aurelia-framework';
 import { Config } from 'aurelia-api';
+import { Router } from 'aurelia-router';
 var VendorList = (function () {
-    function VendorList(config) {
+    function VendorList(config, router) {
         this.config = config;
         this.vendors = [];
         this.errorMsg = null;
         this.api = config.getEndpoint('api');
+        this.router = router;
     }
     VendorList.prototype.activate = function () {
         this.GetVendors();
@@ -34,7 +36,6 @@ var VendorList = (function () {
     };
     VendorList.prototype.select = function (vendor) {
         this.vendorId = vendor.id;
-        this.vendor = vendor;
     };
     __decorate([
         bindable,
@@ -46,7 +47,7 @@ var VendorList = (function () {
     ], VendorList.prototype, "vendor", void 0);
     VendorList = __decorate([
         autoinject,
-        __metadata("design:paramtypes", [Config])
+        __metadata("design:paramtypes", [Config, Router])
     ], VendorList);
     return VendorList;
 }());

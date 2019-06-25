@@ -8,7 +8,7 @@ import { areEqual } from '../../utility';
 @autoinject
 export class ProductDetails {
   @bindable id: number;
-  product: ProductEditViewModel;
+  @bindable product: ProductEditViewModel;
   originalProduct: ProductEditViewModel;
   api: Rest;
 
@@ -16,27 +16,28 @@ export class ProductDetails {
     this.api = config.getEndpoint('api');
   }
 
-  activate(params) {
-    this.id = params.id;
-    return this.api.findOne('product', this.id).then(data => {
+  attached() {
+    this.getProduct();
+  }
+
+  getProduct() {
+    this.api.findOne('product', this.id).then((data: ProductEditViewModel) => {
       this.product = data;
+      this.id = data.id;
       this.originalProduct = JSON.parse(JSON.stringify(this.product));
-    }).then(() => {
-      return new Promise(resolve => {
-        setTimeout(() => {
-          let product = this.product;
-          resolve(JSON.parse(JSON.stringify(product)));
-        }, 200);
-      })
     }).catch(reason => {
       console.log('Could not fetch data: ' + reason);
     });
+  }
+
+  idChanged() {
+    this.getProduct();
   }
   
   canSave() {
     return !areEqual(this.product, this.originalProduct);
   }
-
+  
   save() {
     if (!areEqual(JSON.parse(JSON.stringify(this.product)), this.originalProduct)) {
       this.api.updateOne('product', this.product.id, null, this.product).then(model => {

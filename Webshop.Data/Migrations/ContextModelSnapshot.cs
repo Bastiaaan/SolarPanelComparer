@@ -19,6 +19,35 @@ namespace Webshop.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Webshop.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<byte[]>("ImageData");
+
+                    b.Property<int>("ImageSize");
+
+                    b.Property<int>("ImageType");
+
+                    b.Property<DateTime>("LastUpdatedAt");
+
+                    b.Property<string>("LastUpdatedBy");
+
+                    b.Property<string>("MimeType");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image");
+                });
+
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -59,31 +88,6 @@ namespace Webshop.Data.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("ForeignEntities");
-
-                    b.Property<byte[]>("ImageData");
-
-                    b.Property<int>("ImageSize");
-
-                    b.Property<string>("MimeType");
-
-                    b.Property<int>("ProductId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
@@ -139,31 +143,6 @@ namespace Webshop.Data.Migrations
                     b.ToTable("Vendor");
                 });
 
-            modelBuilder.Entity("Webshop.Data.Models.VendorImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("ForeignEntities");
-
-                    b.Property<byte[]>("ImageData");
-
-                    b.Property<int>("ImageSize");
-
-                    b.Property<string>("MimeType");
-
-                    b.Property<int>("VendorId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorId");
-
-                    b.ToTable("VendorImage");
-                });
-
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
                     b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
@@ -176,14 +155,6 @@ namespace Webshop.Data.Migrations
                     b.HasOne("Webshop.Data.Models.Order")
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.ProductImage", b =>
-                {
-                    b.HasOne("Webshop.Data.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
@@ -200,14 +171,6 @@ namespace Webshop.Data.Migrations
 
                     b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
                         .WithMany("ProductVendors")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.VendorImage", b =>
-                {
-                    b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
-                        .WithMany()
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Webshop.Data.Framework;
 using Webshop.Data.Models;
+using Webshop.Data.Models.Enums;
 
 namespace Webshop.Data.ViewModels
 {
@@ -17,5 +18,7 @@ namespace Webshop.Data.ViewModels
         public int ImageSize { get; set; }
 
         public string MimeType { get; set; }
+
+        public ImageType ImageType { get; set; }
     }
 }

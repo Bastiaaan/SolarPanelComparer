@@ -53,7 +53,7 @@ var ContactDetail = (function () {
         return true;
     };
     ContactDetail = __decorate([
-        autoinject(WebAPI, EventAggregator),
+        autoinject,
         __metadata("design:paramtypes", [WebAPI, EventAggregator])
     ], ContactDetail);
     return ContactDetail;

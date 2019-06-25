@@ -5,11 +5,12 @@ export class VendorViewModel {
   id: number = 0;
   name: string = null;
   address: string;
-  products: ProductVendorViewModel[] = [];
+  amountOfProducts: ProductVendorViewModel[] = [];
 }
 
 export class VendorEditViewModel {
   id: number;
   name: string;
   address: string;
+  productIds: number[] = [];
 }

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Webshop.Data.Models.ModelInterfaces
+{
+    interface ITrackable
+    {
+        DateTime CreatedAt { get; set; }
+
+        string CreatedBy { get; set; }
+
+        DateTime LastUpdatedAt { get; set; }
+
+        string LastUpdatedBy { get; set; }
+    }
+}

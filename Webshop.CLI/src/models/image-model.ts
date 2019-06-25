@@ -8,13 +8,3 @@ export class ImageViewModel {
   imageData: Int8Array;
   imageSize: number = 0;
 }
-
-export class ProductImageViewModel extends ImageViewModel {
-  product: ProductViewModel;
-}
-
-
-
-export class VendorImageViewModel extends ImageViewModel {
-  vendor: VendorViewModel;
-}

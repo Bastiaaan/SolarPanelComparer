@@ -9,6 +9,17 @@
 
     public class VendorEditViewModel : IMapFrom<Vendor>
     {
+        public VendorEditViewModel()
+        {
+            this.ProductIds = new List<int>();
+        }
+
         public int Id { get; set; }
+
+        public string Address { get; set; }
+
+        public string Name { get; set; }
+
+        public IList<int> ProductIds { get; set; }
     }
 }

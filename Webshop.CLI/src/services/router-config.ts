@@ -18,6 +18,7 @@ export class AppRouterConfig {
         { route: 'contacts/:id', moduleId: PLATFORM.moduleName('modules/contacts/contact-detail'), nav: false, name: 'contacts' },
         { route: 'vendors', moduleId: PLATFORM.moduleName('modules/vendor/vendor-list'), nav: true, name: 'vendors', title: 'overview' },
         { route: 'products', moduleId: PLATFORM.moduleName('modules/product/product-list'), nav: true, name: 'products', title: 'overview' },
+        { route: 'vendor/:id', moduleId: PLATFORM.moduleName('modules/vendor/vendor-details'), nav: false, name: 'vendor', title: 'view vendor' },
         { route: 'product/:id', moduleId: PLATFORM.moduleName('modules/product/product-details'), nav: false, name: 'product', title: 'check product' }
       ]);
 

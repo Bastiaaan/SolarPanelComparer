@@ -10,8 +10,8 @@ using Webshop.Data;
 namespace Webshop.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190611132503_TwoInheritedImageEntitiesVendorAndProduct2")]
-    partial class TwoInheritedImageEntitiesVendorAndProduct2
+    [Migration("20190614092415_Re-initial")]
+    partial class Reinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,31 +61,6 @@ namespace Webshop.Data.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("ForeignEntities");
-
-                    b.Property<byte[]>("ImageData");
-
-                    b.Property<int>("ImageSize");
-
-                    b.Property<string>("MimeType");
-
-                    b.Property<int>("ProductId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
@@ -141,31 +116,6 @@ namespace Webshop.Data.Migrations
                     b.ToTable("Vendor");
                 });
 
-            modelBuilder.Entity("Webshop.Data.Models.VendorImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("ForeignEntities");
-
-                    b.Property<byte[]>("ImageData");
-
-                    b.Property<int>("ImageSize");
-
-                    b.Property<string>("MimeType");
-
-                    b.Property<int>("VendorId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorId");
-
-                    b.ToTable("VendorImage");
-                });
-
             modelBuilder.Entity("Webshop.Data.Models.Order", b =>
                 {
                     b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
@@ -178,14 +128,6 @@ namespace Webshop.Data.Migrations
                     b.HasOne("Webshop.Data.Models.Order")
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.ProductImage", b =>
-                {
-                    b.HasOne("Webshop.Data.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Webshop.Data.Models.ProductVendor", b =>
@@ -202,14 +144,6 @@ namespace Webshop.Data.Migrations
 
                     b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
                         .WithMany("ProductVendors")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Webshop.Data.Models.VendorImage", b =>
-                {
-                    b.HasOne("Webshop.Data.Models.Vendor", "Vendor")
-                        .WithMany()
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

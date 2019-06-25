@@ -13,17 +13,18 @@
     using Webshop.Data.ViewModels;
     using System.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
+    using System.Linq;
 
-    public class ImageService<T> : ServiceBase where T : Image
+    public class ImageService : ServiceBase
     {
         public ImageService(Context context, IConfiguration configuration, IMapper Mapper, IConfigurationProvider configurationProvider) : base(context, configuration, Mapper, configurationProvider)
         { }
 
-        public async Task<bool> AddImage(T entity)
+        public async Task<bool> AddImage(Image image)
         {
             try
             {
-                this.DbContext.Add(entity);
+                this.DbContext.Add(image);
                 await this.DbContext.SaveChangesAsync();
                 return true;
             }
@@ -33,14 +34,18 @@
             }
         }
 
-        public async Task<IEnumerable<T>> LoadImages()
+        public IEnumerable<ImageViewModel> LoadImages()
         {
-            return await this.DbContext.Set<T>().ToArrayAsync();
+            var imagesAvailable = this.DbContext.Images.ToList();
+            foreach(Image img in imagesAvailable)
+            {
+                yield return this.Mapper.Map<ImageViewModel>(img);
+            }
         }
 
-        public T GetImageById(long id)
+        public ImageViewModel GetImageById(long id)
         {
-            return this.DbContext.Set<T>().Find(id);
+            return this.Mapper.Map<ImageViewModel>(this.DbContext.Images.Find(id));
         }
     }
 }

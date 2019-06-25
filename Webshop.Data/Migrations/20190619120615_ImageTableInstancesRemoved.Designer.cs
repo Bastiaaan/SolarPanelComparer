@@ -10,8 +10,8 @@ using Webshop.Data;
 namespace Webshop.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190604125053_Initialization")]
-    partial class Initialization
+    [Migration("20190619120615_ImageTableInstancesRemoved")]
+    partial class ImageTableInstancesRemoved
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,11 +27,21 @@ namespace Webshop.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("FileName");
 
                     b.Property<byte[]>("ImageData");
 
                     b.Property<int>("ImageSize");
+
+                    b.Property<int>("ImageType");
+
+                    b.Property<DateTime>("LastUpdatedAt");
+
+                    b.Property<string>("LastUpdatedBy");
 
                     b.Property<string>("MimeType");
 

@@ -16,12 +16,12 @@
 
         public int ProductId { get; set; }
 
-        [ForeignKey("ProductId")]
+        [ForeignKey("Id")]
         public virtual Product Product { get; set; }
         
         public int VendorId { get; set; }
 
-        [ForeignKey("VendorId")]
+        [ForeignKey("Id")]
         public virtual Vendor Vendor { get; set; }
 
         public double Price { get; set; }

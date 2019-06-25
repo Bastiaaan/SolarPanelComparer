@@ -18,10 +18,10 @@
     public class VendorController : Controller
     {
         private readonly VendorService service;
-        private readonly ImageService<VendorImage> imageService;
+        private readonly ImageService imageService;
         private readonly IMapper mapper;
 
-        public VendorController(VendorService service, IMapper mapper, ImageService<VendorImage> imageService)
+        public VendorController(VendorService service, IMapper mapper, ImageService imageService)
         {
             this.service = service;
             this.mapper = mapper;
@@ -54,19 +54,6 @@
             return this.NotFound();
         }
 
-        [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(VendorEditViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var vendor = await this.service.GetVendorById<VendorEditViewModel>(id);
-            if (vendor != null)
-            {
-                return this.Ok(vendor);
-            }
-
-            return this.NotFound();
-        }
-
         [HttpPut("{id:int}")]
         [ProducesResponseType(typeof(VendorEditViewModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Edit(int id, [FromBody]VendorEditViewModel vendor)
@@ -74,7 +61,7 @@
             var vendorResult = await this.service.GetVendorById<VendorEditViewModel>(id);
             if (vendorResult != null)
             {
-                var isEdited = await this.service.Update(this.mapper.Map<Vendor>(vendor));
+                var isEdited = await this.service.Update(vendor);
                 if(isEdited)
                 {
                     return this.Ok(vendor);

@@ -3,7 +3,7 @@
   <require from="./product-details"></require>
   <div class="container">
     <div class="row mb-2">      
-      <div class="col-12">
+      <div class="col-12" style="border: 1px solid black;">
         <add-product></add-product>      
       </div>
     </div>
@@ -11,8 +11,8 @@
       <div class="col-4">
         <div class="product-list" style="height: 750px; overflow-y: scroll;">
           <ul class="list-group">
-            <li repeat.for="product of products" class="list-group-item ${product.id === $parent.productId ? 'active' : ''}">
-              <a route-href="route: product; params.bind: {id:product.id}" click.trigger="$parent.select(product)">
+            <li repeat.for="product of products" class="list-group-item ${product.id === $parent.productId ? 'active' : ''}" click.trigger="select(product)">
+              <a route-href="route: products;">
                 <h4>${product.name}</h4>
                 <p>aanbieders: ${product.amountOfVendors}</p>
               </a>
@@ -22,7 +22,7 @@
       </div>
       <div class="col-8">
         <div>
-          <product-details bind.id="id"></product-details>
+          <product-details id.bind="productId"></product-details>
         </div>
       </div>
     </div>

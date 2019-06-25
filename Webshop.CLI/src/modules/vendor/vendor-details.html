@@ -1,1 +1,40 @@
-﻿
+﻿<template>
+  <div class="card">
+    <div class="card-header text-white bg-primary">
+      <h4>Vendor</h4>
+    </div>
+    <div class="card-body">
+      <form role="form">
+        <input type="hidden" value.bind="vendor.id" />
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">Vendor name</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="name" class="form-control ${vendorId == null ? 'disabled' : ''}" value.bind="vendor.name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">supplying address</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="description" class="form-control ${vendorId == null ? 'disabled' : ''}" value.bind="vendor.address" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">select available product(s)</label>
+          <div class="col-sm-9" style="height: 150px; overflow-y: scroll;">
+            <ul class="list-group">
+              <li repeat.for="product of products" class="list-group-item">
+              <text>${product.name}:</text> <input type="checkbox" value.bind="product.id" click.delegate="selectProduct(product.id)" />
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-success float-right ${vendorId == null ? 'disabled' : ''}" click.delegate="save(vendor)">Save</button>
+          <button class="btn btn-success" click.trigger="navigateBack()">terug naar lijst</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

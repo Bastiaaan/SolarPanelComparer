@@ -6,7 +6,6 @@
     "resources": "resources",
     "elements": "resources/elements",
     "attributes": "resources/attributes",
-    "modules":  "modules",
     "valueConverters": "resources/value-converters",
     "bindingBehaviors": "resources/binding-behaviors",
     "modules": "modules",

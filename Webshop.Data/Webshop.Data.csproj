@@ -23,6 +23,18 @@
     <Compile Remove="Migrations\20190501112400_SupplierRenamedToVendorAndPropertiesMovedToProductVendor.cs" />
     <Compile Remove="Migrations\20190611130537_ResetWithRemovingImageProperty.cs" />
     <Compile Remove="Migrations\20190611131219_ForeachOwnEntityAnImagetableInitialized.cs" />
+    <Compile Remove="Migrations\20190614075228_renamedImageIdsForProductsAndVendors.cs" />
+    <Compile Remove="Migrations\20190614075228_renamedImageIdsForProductsAndVendors.Designer.cs" />
+    <Compile Remove="Migrations\20190614083204_renamedImageIdsForProductsAndVendors.cs" />
+    <Compile Remove="Migrations\20190614083204_renamedImageIdsForProductsAndVendors.Designer.cs" />
+    <Compile Remove="Migrations\20190614084808_renamedImageIdsForProductsAndVendors.cs" />
+    <Compile Remove="Migrations\20190614084808_renamedImageIdsForProductsAndVendors.Designer.cs" />
+    <Compile Remove="Migrations\20190614085929_renamedImageIdsForProductsAndVendors.cs" />
+    <Compile Remove="Migrations\20190614085929_renamedImageIdsForProductsAndVendors.Designer.cs" />
+    <Compile Remove="Migrations\20190614091047_InitialWithoutImageBasedTables.cs" />
+    <Compile Remove="Migrations\20190614091047_InitialWithoutImageBasedTables.Designer.cs" />
+    <Compile Remove="Migrations\20190614092039_InitialWithoutImageBasedTables2.cs" />
+    <Compile Remove="Migrations\20190614092039_InitialWithoutImageBasedTables2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

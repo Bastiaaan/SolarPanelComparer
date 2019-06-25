@@ -55,11 +55,27 @@
             }
         }
 
-        public async Task<bool> Update(Vendor vendor)
+        public async Task<bool> Update(VendorEditViewModel vendor)
         {
             try
             {
-                DbContext.Vendors.Update(vendor);
+                if (vendor.ProductIds.Count >= 1)
+                {
+                    foreach (int id in vendor.ProductIds)
+                    {
+                        var productVendor = new ProductVendorViewModel
+                        {
+                            VendorId = vendor.Id,
+                            ProductId = id
+                        };
+
+                        var mappedToDomain = this.Mapper.Map<ProductVendor>(productVendor);
+                        this.DbContext.ProductVendor.Add(mappedToDomain);
+                    }
+                }
+
+                var mapped = this.Mapper.Map<Vendor>(vendor);
+                DbContext.Vendors.Update(mapped);
                 DbContext.Entry(vendor).State = EntityState.Modified;
                 await DbContext.SaveChangesAsync();
                 return true;

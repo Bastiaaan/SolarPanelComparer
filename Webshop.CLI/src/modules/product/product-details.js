@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import { ProductEditViewModel } from '../../models/product-model';
 import { Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
 import { EventAggregator } from 'aurelia-event-aggregator';
@@ -19,22 +20,21 @@ var ProductDetails = (function () {
         this.ea = ea;
         this.api = config.getEndpoint('api');
     }
-    ProductDetails.prototype.activate = function (params) {
+    ProductDetails.prototype.attached = function () {
+        this.getProduct();
+    };
+    ProductDetails.prototype.getProduct = function () {
         var _this = this;
-        this.id = params.id;
-        return this.api.findOne('product', this.id).then(function (data) {
+        this.api.findOne('product', this.id).then(function (data) {
             _this.product = data;
+            _this.id = data.id;
             _this.originalProduct = JSON.parse(JSON.stringify(_this.product));
-        }).then(function () {
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    var product = _this.product;
-                    resolve(JSON.parse(JSON.stringify(product)));
-                }, 200);
-            });
         }).catch(function (reason) {
             console.log('Could not fetch data: ' + reason);
         });
+    };
+    ProductDetails.prototype.selectProduct = function () {
+        this.getProduct();
     };
     ProductDetails.prototype.canSave = function () {
         return !areEqual(this.product, this.originalProduct);
@@ -60,6 +60,10 @@ var ProductDetails = (function () {
         bindable,
         __metadata("design:type", Number)
     ], ProductDetails.prototype, "id", void 0);
+    __decorate([
+        bindable,
+        __metadata("design:type", ProductEditViewModel)
+    ], ProductDetails.prototype, "product", void 0);
     ProductDetails = __decorate([
         autoinject,
         __metadata("design:paramtypes", [Config, Router, EventAggregator])

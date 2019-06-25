@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
-import { ProductEditViewModel } from '../../models/product-model';
+import { ProductViewModel } from '../../models/product-model';
 import { autoinject, bindable } from 'aurelia-framework';
 var productList = (function () {
     function productList(config, router) {
@@ -33,11 +33,14 @@ var productList = (function () {
     };
     productList.prototype.select = function (product) {
         this.productId = product.id;
-        this.router.navigateToRoute('product', { id: this.productId });
     };
     __decorate([
         bindable,
-        __metadata("design:type", ProductEditViewModel)
+        __metadata("design:type", Number)
+    ], productList.prototype, "productId", void 0);
+    __decorate([
+        bindable,
+        __metadata("design:type", ProductViewModel)
     ], productList.prototype, "product", void 0);
     productList = __decorate([
         autoinject,

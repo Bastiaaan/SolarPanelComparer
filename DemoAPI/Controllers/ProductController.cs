@@ -19,10 +19,10 @@ namespace DemoAPI.Controllers
     public class ProductController : Controller
     {
         private readonly ProductService productService;
-        private readonly ImageService<ProductImage> imageService;
+        private readonly ImageService imageService;
         private readonly IMapper autoMapper;
 
-        public ProductController(ProductService productService, IMapper mapper, ImageService<ProductImage> imageService)
+        public ProductController(ProductService productService, IMapper mapper, ImageService imageService)
         {
             this.productService = productService;
             this.autoMapper = mapper;

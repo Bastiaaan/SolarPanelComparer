@@ -1,15 +1,14 @@
 ﻿import { Rest, Config } from 'aurelia-api';
 import { Router } from 'aurelia-router';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { ProductViewModel, ProductEditViewModel } from '../../models/product-model';
+import { ProductEditViewModel, ProductViewModel } from '../../models/product-model';
 import { autoinject, bindable } from 'aurelia-framework';
 
 @autoinject
 export class productList {
-  @bindable product: ProductEditViewModel;
+  @bindable productId: number;
+  @bindable product: ProductViewModel;
   products;
   api: Rest;
-  productId: number;
   router: Router;
 
   constructor(private config: Config, router: Router) {
@@ -36,6 +35,5 @@ export class productList {
 
   select(product: ProductEditViewModel) {
     this.productId = product.id;
-    this.router.navigateToRoute('product', { id: this.productId });
   }
 }

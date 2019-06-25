@@ -11,7 +11,7 @@
         public Context CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<Context>();
-            optionsBuilder.UseSqlServer(@"Server=WS120;DataBase=WebShop;Trusted_Connection=true;MultipleActiveResultSets=false");
+            optionsBuilder.UseSqlServer(@"Server=DEVSQL1;DataBase=Bastiaan_WebShop;Trusted_Connection=true;MultipleActiveResultSets=false");
 
             return new Context(optionsBuilder.Options);
         }

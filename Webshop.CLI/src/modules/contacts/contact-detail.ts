@@ -10,7 +10,7 @@ interface Contact {
   email: string; 
 }
 
-@autoinject(WebAPI, EventAggregator)
+@autoinject
 export class ContactDetail {
   routeConfig;
   contact: Contact;
